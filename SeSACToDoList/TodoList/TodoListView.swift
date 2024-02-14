@@ -27,7 +27,7 @@ class TodoListView: BaseView {
 	}
 
 	override func configureView() {
-		todoListTableView.backgroundColor = .green
+		todoListTableView.backgroundColor = .brown
 	}
 
 

@@ -21,6 +21,9 @@
 		A5B9D18F2B7CD404008E4C8E /* AddTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D18E2B7CD404008E4C8E /* AddTodoViewController.swift */; };
 		A5B9D1912B7CD412008E4C8E /* AddTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1902B7CD412008E4C8E /* AddTodoView.swift */; };
 		A5B9D1962B7CDB97008E4C8E /* OptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1952B7CDB97008E4C8E /* OptionTableViewCell.swift */; };
+		A5B9D1992B7CFF1E008E4C8E /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1982B7CFF1E008E4C8E /* DateViewController.swift */; };
+		A5B9D19B2B7D0F70008E4C8E /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D19A2B7D0F70008E4C8E /* TagViewController.swift */; };
+		A5B9D19D2B7D124E008E4C8E /* PriorityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D19C2B7D124E008E4C8E /* PriorityViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +42,9 @@
 		A5B9D18E2B7CD404008E4C8E /* AddTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewController.swift; sourceTree = "<group>"; };
 		A5B9D1902B7CD412008E4C8E /* AddTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoView.swift; sourceTree = "<group>"; };
 		A5B9D1952B7CDB97008E4C8E /* OptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionTableViewCell.swift; sourceTree = "<group>"; };
+		A5B9D1982B7CFF1E008E4C8E /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
+		A5B9D19A2B7D0F70008E4C8E /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
+		A5B9D19C2B7D124E008E4C8E /* PriorityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +81,7 @@
 				A5701EFD2B7CAB8F00F126B0 /* Base */,
 				A5B9D1832B7CD00C008E4C8E /* TodoList */,
 				A5B9D18D2B7CD3E9008E4C8E /* AddTodo */,
+				A5B9D1972B7CFEE5008E4C8E /* New Group */,
 				A5701EE92B7CAB5F00F126B0 /* AppDelegate.swift */,
 				A5701EEB2B7CAB5F00F126B0 /* SceneDelegate.swift */,
 				A5701EED2B7CAB5F00F126B0 /* ViewController.swift */,
@@ -110,6 +117,9 @@
 				A5B9D18E2B7CD404008E4C8E /* AddTodoViewController.swift */,
 				A5B9D1902B7CD412008E4C8E /* AddTodoView.swift */,
 				A5B9D1922B7CDB40008E4C8E /* TableViewCell */,
+				A5B9D1982B7CFF1E008E4C8E /* DateViewController.swift */,
+				A5B9D19A2B7D0F70008E4C8E /* TagViewController.swift */,
+				A5B9D19C2B7D124E008E4C8E /* PriorityViewController.swift */,
 			);
 			path = AddTodo;
 			sourceTree = "<group>";
@@ -120,6 +130,13 @@
 				A5B9D1952B7CDB97008E4C8E /* OptionTableViewCell.swift */,
 			);
 			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		A5B9D1972B7CFEE5008E4C8E /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,10 +222,13 @@
 				A5701EEA2B7CAB5F00F126B0 /* AppDelegate.swift in Sources */,
 				A5B9D1872B7CD033008E4C8E /* BaseView.swift in Sources */,
 				A5B9D18F2B7CD404008E4C8E /* AddTodoViewController.swift in Sources */,
+				A5B9D19D2B7D124E008E4C8E /* PriorityViewController.swift in Sources */,
 				A5B9D1892B7CD03D008E4C8E /* TodoListView.swift in Sources */,
 				A5701EEC2B7CAB5F00F126B0 /* SceneDelegate.swift in Sources */,
 				A5B9D1962B7CDB97008E4C8E /* OptionTableViewCell.swift in Sources */,
+				A5B9D19B2B7D0F70008E4C8E /* TagViewController.swift in Sources */,
 				A5B9D1852B7CD023008E4C8E /* TodoListViewController.swift in Sources */,
+				A5B9D1992B7CFF1E008E4C8E /* DateViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
