@@ -19,17 +19,17 @@ class OptionTableViewCell: UITableViewCell {
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-		fakeView.addSubview(titleLabel)
-		fakeView.addSubview(buttonImage)
+		contentView.addSubview(titleLabel)
+		contentView.addSubview(buttonImage)
 
-		contentView.addSubview(fakeView)
+//		contentView.addSubview(fakeView)
 
 
 		titleLabel.snp.makeConstraints { make in
 			make.centerY.equalToSuperview()
 			make.leading.equalToSuperview().offset(8)
 			make.height.equalTo(40)
-			make.width.equalTo(160)
+			make.width.greaterThanOrEqualTo(160)
 		}
 
 		buttonImage.snp.makeConstraints { make in
@@ -39,15 +39,15 @@ class OptionTableViewCell: UITableViewCell {
 
 		}
 
-		fakeView.snp.makeConstraints { make in
-			make.top.horizontalEdges.equalToSuperview()
-			make.height.equalTo(48)
-		}
+//		fakeView.snp.makeConstraints { make in
+//			make.top.horizontalEdges.equalToSuperview()
+//			make.height.equalTo(48)
+//		}
 
 		backgroundColor = .clear
 
-		fakeView.layer.cornerRadius = 6
-		fakeView.backgroundColor = .darkGray
+		layer.cornerRadius = 6
+		backgroundColor = .darkGray
 
 
 		titleLabel.textColor = .white

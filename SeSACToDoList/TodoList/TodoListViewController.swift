@@ -7,12 +7,13 @@
 
 import UIKit
 
-class TodoListViewController: UIViewController {
+class TodoListViewController: BaseViewController {
 
 	let mainView = TodoListView()
 
 	var addTodoButton: UIBarButtonItem!
 	var addCategoryButton: UIBarButtonItem!
+	
 
 	override func loadView() {
 		view = mainView
@@ -27,6 +28,15 @@ class TodoListViewController: UIViewController {
 
 
     }
+
+	override func configureView() {
+		mainView.categoryCollectionView.delegate = self
+		mainView.categoryCollectionView.dataSource = self
+		mainView.categoryCollectionView.register(CategoryCollectionViewCell.self
+												 , forCellWithReuseIdentifier: "CategoryCollectionViewCell")
+	}
+
+
 
 	func configureToolbar() {
 		self.navigationController?.isToolbarHidden = false
@@ -55,5 +65,21 @@ class TodoListViewController: UIViewController {
 		print(#function)
 	}
 
+
+}
+
+
+extension TodoListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		5
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath)
+
+		cell.backgroundColor = .white
+		return cell
+	}
+	
 
 }

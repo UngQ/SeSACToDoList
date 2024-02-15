@@ -29,6 +29,8 @@ enum OptionType: Int, CaseIterable {
 
 class AddTodoViewController: BaseViewController {
 
+	let optionTypeList = OptionType.allCases
+
 	let mainView = AddTodoView()
 
 	override func loadView() {
@@ -53,17 +55,55 @@ class AddTodoViewController: BaseViewController {
 	}
 }
 
+
+//extension AddTodoViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+//	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//		4
+//	}
+//	
+//	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OptionCollectionViewCell", for: indexPath)
+//		
+//
+//		return cell
+//	}
+//
+//	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//
+//		let vc = DateViewController()
+//
+//		navigationController?.pushViewController(vc, animated: true)
+//	}
+//}
+
+
+
+
+
 extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return OptionType.allCases.count
+	}
+
+	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		return UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+	}
+//	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//		return " "
+//	}
+	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return 0
+	}
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return OptionType.allCases.count
+		return 1
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "OptionTableViewCell", for: indexPath) as! OptionTableViewCell
-		cell.titleLabel.text = OptionType.allCases[indexPath.row].title
-		cell.selectionStyle = .none
+		cell.titleLabel.text = OptionType.allCases[indexPath.section].title
+//		cell.selectionStyle = .none
 		return cell
 	}
 
@@ -72,9 +112,18 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		
+	
+//		let index = indexPath.row
+
+//		switch optionTypeList[index] {
+//		case .date:
+//		case .image:
+//		case .rank:
+//		case .tag:
+//		}
+
 		//클로저 값전달
-		if indexPath.row == OptionType.date.rawValue {
+		if indexPath.section == OptionType.date.rawValue {
 			let vc = DateViewController()
 			vc.valueSpace = { value in
 				let cell = self.mainView.optionTableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as! OptionTableViewCell
@@ -84,25 +133,28 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 		}
 
 		//노티피케이션 값전달
-		else if indexPath.row == OptionType.tag.rawValue {
+		else if indexPath.section == OptionType.tag.rawValue {
 			let vc  = TagViewController()
 
 			navigationController?.pushViewController(vc, animated: true)
 		}
 
 		//클로저 값전달
-		else if indexPath.row == OptionType.rank.rawValue {
+		else if indexPath.section == OptionType.rank.rawValue {
 				let vc = PriorityViewController()
 			vc.valueSpace = { value in
 				let cell = self.mainView.optionTableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as! OptionTableViewCell
 				cell.titleLabel.text = "우선 순위: \(value)"
 			}
+
 				navigationController?.pushViewController(vc, animated: true)
 			}
 		}
 
+	
+
 	@objc func tagReceivedNotification(notification: NSNotification) {
-		let cell = self.mainView.optionTableView.cellForRow(at: IndexPath(row: OptionType.tag.rawValue, section: 0)) as! OptionTableViewCell
+		let cell = self.mainView.optionTableView.cellForRow(at: IndexPath(row: 0, section: OptionType.tag.rawValue)) as! OptionTableViewCell
 
 
 		if let value = notification.userInfo?["tag"] as? String {
@@ -139,7 +191,7 @@ extension AddTodoViewController: UITextViewDelegate {
 
 		textView.constraints.forEach { (constraint) in
 
-			if estimatedSize.height <= 84 {}
+			if estimatedSize.height <= 84 || estimatedSize.height > 180 {}
 			else {
 				if constraint.firstAttribute == .height {
 					constraint.constant = estimatedSize.height

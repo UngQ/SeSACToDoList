@@ -9,7 +9,6 @@ import UIKit
 
 class AddTodoView: BaseView {
 
-
 	let fakeView = UIView()
 
 	let titleTextField = UITextField()
@@ -54,7 +53,7 @@ class AddTodoView: BaseView {
 		}
 
 		optionTableView.snp.makeConstraints { make in
-			make.top.equalTo(memoTextView.snp.bottom).offset(12)
+			make.top.equalTo(memoTextView.snp.bottom).offset(4)
 			make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(4)
 			make.bottom.equalTo(safeAreaLayoutGuide)
 		}
@@ -75,22 +74,11 @@ class AddTodoView: BaseView {
 		memoTextView.backgroundColor = .darkGray
 		memoTextView.layer.cornerRadius = cornerRadius
 		memoTextView.font = .systemFont(ofSize: 14)
-		memoTextView.textContainerInset = UIEdgeInsets(top: 2, left: 4, bottom: 4, right: 4	)
+		memoTextView.textContainerInset = UIEdgeInsets(top: 2, left: 4, bottom: 8, right: 4	)
+//		memoTextView.textContainer.lineFragmentPadding = 0
 		memoTextView.text = "메모"
 		memoTextView.textColor = .lightGray
 
-
 		optionTableView.backgroundColor = .clear
-//		optionTableView.layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
-
-//		optionTableView.backgroundColor = .brown
-
-//		dateButton.backgroundColor = .brown
-//		dateButton.layer.cornerRadius = cornerRadius
-//		dateButton.setTitle("마감일", for: .normal)
-//		dateButton.titleLabel?.font = .boldSystemFont(ofSize: 15)
-//		dateButton.titleLabel?.textAlignment = .left
-
 	}
-
 }
