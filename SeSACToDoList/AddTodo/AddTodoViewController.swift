@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import RealmSwift
 
 enum OptionType: Int, CaseIterable {
 	case date
 	case tag
-	case rank
+	case priority
 	case image
 
 	var title: String {
@@ -19,7 +20,7 @@ enum OptionType: Int, CaseIterable {
 			"마감일"
 		case .tag:
 			"태그"
-		case .rank:
+		case .priority:
 			"우선 순위"
 		case .image:
 			"이미지 추가 (작업 중)"
@@ -33,12 +34,20 @@ class AddTodoViewController: BaseViewController {
 
 	let mainView = AddTodoView()
 
+	var endDate: Date?
+	var tag: String?
+	var priority: Int?
+
+
 	override func loadView() {
 		view = mainView
 	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+		let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
+		navigationItem.rightBarButtonItem = saveButton
 
 		NotificationCenter.default.addObserver(self,
 											   selector: #selector(tagReceivedNotification),
@@ -53,32 +62,26 @@ class AddTodoViewController: BaseViewController {
 		mainView.optionTableView.dataSource = self
 		mainView.optionTableView.register(OptionTableViewCell.self, forCellReuseIdentifier: "OptionTableViewCell")
 	}
+
+	@objc func saveButtonClicked() {
+		let realm = try! Realm()
+
+		let data = TodoTable(regDate: Date(),
+							 title: mainView.titleTextField.text!,
+							 memo: mainView.memoTextView.text,
+							 endDate: endDate ?? Date(),
+							 tag: tag ?? "",
+							 priority: priority ?? 0)
+
+		try! realm.write {
+			realm.add(data)
+			print(data)
+		}
+
+		navigationController?.popViewController(animated: true)
+
+	}
 }
-
-
-//extension AddTodoViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-//	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//		4
-//	}
-//	
-//	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OptionCollectionViewCell", for: indexPath)
-//		
-//
-//		return cell
-//	}
-//
-//	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//
-//		let vc = DateViewController()
-//
-//		navigationController?.pushViewController(vc, animated: true)
-//	}
-//}
-
-
-
-
 
 extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 
@@ -89,9 +92,7 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		return UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 	}
-//	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//		return " "
-//	}
+
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		return 0
 	}
@@ -127,6 +128,12 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 			let vc = DateViewController()
 			vc.valueSpace = { value in
 				let cell = self.mainView.optionTableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as! OptionTableViewCell
+
+				if let date = value.toDate() {
+					self.endDate = date
+					print(date)
+				}
+
 				cell.titleLabel.text = "마감일: \(value)"
 			}
 			navigationController?.pushViewController(vc, animated: true)
@@ -140,10 +147,18 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 		}
 
 		//클로저 값전달
-		else if indexPath.section == OptionType.rank.rawValue {
+		else if indexPath.section == OptionType.priority.rawValue {
 				let vc = PriorityViewController()
 			vc.valueSpace = { value in
 				let cell = self.mainView.optionTableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as! OptionTableViewCell
+	
+				for i in PriorityType.allCases {
+					if i.value == value {
+						self.priority = i.rawValue
+						print(i.rawValue)
+					}
+				}
+
 				cell.titleLabel.text = "우선 순위: \(value)"
 			}
 
@@ -158,6 +173,7 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 
 
 		if let value = notification.userInfo?["tag"] as? String {
+			tag = value
 			cell.titleLabel.text = "태그: #\(value)"
 		}
 	}

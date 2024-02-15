@@ -60,10 +60,7 @@ class DateViewController: BaseViewController {
 
 	@objc func datePickerValueChanged(_ sender: UIDatePicker) {
 		let pickedDate = sender.date
-		let formatter = DateFormatter()
-		formatter.dateFormat = "yyyy년 MM월 dd일"
-		let result = formatter.string(from: pickedDate)
-		userTextField.text = result
+		userTextField.text = pickedDate.toString()
 
 	}
 

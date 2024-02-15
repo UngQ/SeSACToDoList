@@ -20,7 +20,7 @@ class TodoTable: Object {
 	@Persisted var tag: String
 	@Persisted var priority: Int
 
-	init(regDate: Date, title: String, memo: String, endDate: Date, tag: String, priority: Int) {
+	convenience init(regDate: Date, title: String, memo: String, endDate: Date, tag: String, priority: Int) {
 		self.init()
 		self.regDate = regDate
 		self.title = title

@@ -2,7 +2,7 @@
 //  TodoListViewController.swift
 //  SeSACToDoList
 //
-//  Created by ungQ on 2/14/24.
+//  Created by ungQ on 2/16/24.
 //
 
 import UIKit
@@ -10,74 +10,81 @@ import UIKit
 class TodoListViewController: BaseViewController {
 
 	let mainView = TodoListView()
-
-	var addTodoButton: UIBarButtonItem!
-	var addCategoryButton: UIBarButtonItem!
-	
+	let test = UIButton()
+	var list = TodoListDBManager.todoList!
 
 	override func loadView() {
 		view = mainView
+	}
+
+	override func viewWillAppear(_ animated: Bool) {
 
 	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		configureToolbar()
-
-
 
     }
 
 	override func configureView() {
-		mainView.categoryCollectionView.delegate = self
-		mainView.categoryCollectionView.dataSource = self
-		mainView.categoryCollectionView.register(CategoryCollectionViewCell.self
-												 , forCellWithReuseIdentifier: "CategoryCollectionViewCell")
+		addPullDownButtonToNavigationBar()
+
+		mainView.todoListTableView.delegate = self
+		mainView.todoListTableView.dataSource = self
+		mainView.todoListTableView.register(TodoListTableViewCell.self, forCellReuseIdentifier: "TodoListTableViewCell")
+	}
+
+	@objc func rightBarButtonItemClicked() {
+
+		}
+
+	func createMenuItems() -> UIMenu {
+		let action1 = UIAction(title: "마감일 순") { action in
+			self.list = TodoListDBManager.todoList.sorted(byKeyPath: "endDate", ascending: true)
+
+			self.mainView.todoListTableView.reloadData()
+		}
+
+		let action2 = UIAction(title: "제목 순") { action in
+			self.list = TodoListDBManager.todoList.sorted(byKeyPath: "title", ascending: true)
+
+			self.mainView.todoListTableView.reloadData()
+		}
+
+		let action3 = UIAction(title: "우선순위 낮음만") { action in
+			self.list = TodoListDBManager.todoList.filter("priority == %d", 2)
+			self.mainView.todoListTableView.reloadData()
+		}
+
+		let menu = UIMenu(title: "정렬", children: [action1, action2, action3])
+		return menu
 	}
 
 
+	func addPullDownButtonToNavigationBar() {
+		// Create the menu
+		let menu = createMenuItems()
 
-	func configureToolbar() {
-		self.navigationController?.isToolbarHidden = false
+		// Create a bar button item
+		let menuBarButton = UIBarButtonItem(title: "Menu", image: UIImage(systemName: "ellipsis.circle"), primaryAction: nil, menu: menu)
 
-		let customButton = UIButton(type: .system)
-			customButton.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
-			customButton.setTitle(" 새로운 할 일", for: .normal)
-			customButton.addTarget(self, action: #selector(addTodoButtonClicked), for: .touchUpInside)
-			customButton.sizeToFit()
-
-		addTodoButton = UIBarButtonItem(customView: customButton)
-		addCategoryButton = UIBarButtonItem(title: "목록 추가", style: .plain, target: self, action: #selector(addCategoryButtonClicked))
-		let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-
-		self.toolbarItems = [addTodoButton, flexibleSpace, addCategoryButton]
+		// Set the bar button item to the navigation item (typically the right bar button item)
+		navigationItem.rightBarButtonItem = menuBarButton
 	}
-
-	@objc func addTodoButtonClicked() {
-
-		let vc = AddTodoViewController()
-
-		navigationController?.pushViewController(vc, animated: true)
-	}
-
-	@objc func addCategoryButtonClicked() {
-		print(#function)
-	}
-
-
 }
 
-
-extension TodoListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		5
+extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		list.count
 	}
 	
-	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath)
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "TodoListTableViewCell", for: indexPath) as! TodoListTableViewCell
 
-		cell.backgroundColor = .white
+
+		cell.titleLabel.text = "\(list[indexPath.row].title) | \(list[indexPath.row].endDate) | \(PriorityType.allCases[list[indexPath.row].priority].value)"
+
 		return cell
 	}
 	

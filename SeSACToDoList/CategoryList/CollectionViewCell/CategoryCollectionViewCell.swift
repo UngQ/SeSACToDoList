@@ -35,8 +35,8 @@ class CategoryCollectionViewCell: UICollectionViewCell {
 		}
 
 		categoryTitleLabel.snp.makeConstraints { make in
-			make.trailing.bottom.equalToSuperview().offset(-8)
-			make.leading.equalToSuperview().offset(8)
+			make.trailing.bottom.equalToSuperview().offset(-12)
+			make.leading.equalToSuperview().offset(12)
 			make.top.equalTo(categoryImageView.snp.bottom).offset(8)
 		}
 
@@ -48,13 +48,21 @@ class CategoryCollectionViewCell: UICollectionViewCell {
 	}
 
 	func configureCell() {
+		backgroundColor = .darkGray
+		layer.cornerRadius = 8
+
 		let cornerRadius = (UIScreen.main.bounds.width - (12 * 3)) / 16
-		categoryImageView.backgroundColor = .red
 		categoryImageView.layer.cornerRadius = cornerRadius
+		categoryImageView.image = UIImage(systemName: "calendar.circle.fill")
+		categoryImageView.tintColor = .orange
 
-		categoryTitleLabel.backgroundColor = .blue
 
-		categoryCountLabel.backgroundColor = .green
+		categoryTitleLabel.textColor = .lightGray
+
+
+		categoryCountLabel.textAlignment = .center
+		categoryCountLabel.font = .boldSystemFont(ofSize: 32)
+		categoryCountLabel.textColor = .white
 	}
 
 	required init?(coder: NSCoder) {

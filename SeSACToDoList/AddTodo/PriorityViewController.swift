@@ -7,9 +7,25 @@
 
 import UIKit
 
+enum PriorityType: Int, CaseIterable {
+
+	case upper
+	case middle
+	case lower
+
+	var value: String {
+		switch self {
+		case .upper: "상"
+		case .middle: "중"
+		case .lower: "하"
+		}
+	}
+
+}
+
 class PriorityViewController: BaseViewController {
 	
-	let items = ["상", "중", "하"]
+	let items = PriorityType.allCases.map { $0.value }
 	lazy var segmented = UISegmentedControl(items: items)
 	var selectedIndex = 0
 
@@ -18,7 +34,7 @@ class PriorityViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+	
     }
     
 
