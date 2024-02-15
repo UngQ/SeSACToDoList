@@ -11,7 +11,7 @@ class TodoListViewController: BaseViewController {
 
 	let mainView = TodoListView()
 	let test = UIButton()
-	var list = TodoListDBManager.todoList!
+	var list = TodoListDBManager.shared.todoList!
 
 	override func loadView() {
 		view = mainView
@@ -41,19 +41,19 @@ class TodoListViewController: BaseViewController {
 
 	func createMenuItems() -> UIMenu {
 		let action1 = UIAction(title: "마감일 순") { action in
-			self.list = TodoListDBManager.todoList.sorted(byKeyPath: "endDate", ascending: true)
+			self.list = TodoListDBManager.shared.todoList.sorted(byKeyPath: "endDate", ascending: true)
 
 			self.mainView.todoListTableView.reloadData()
 		}
 
 		let action2 = UIAction(title: "제목 순") { action in
-			self.list = TodoListDBManager.todoList.sorted(byKeyPath: "title", ascending: true)
+			self.list = TodoListDBManager.shared.todoList.sorted(byKeyPath: "title", ascending: true)
 
 			self.mainView.todoListTableView.reloadData()
 		}
 
 		let action3 = UIAction(title: "우선순위 낮음만") { action in
-			self.list = TodoListDBManager.todoList.filter("priority == %d", 2)
+			self.list = TodoListDBManager.shared.todoList.filter("priority == %d", 2)
 			self.mainView.todoListTableView.reloadData()
 		}
 

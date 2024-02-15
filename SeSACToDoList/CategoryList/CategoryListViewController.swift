@@ -30,8 +30,9 @@ class CategoryListViewController: BaseViewController {
         super.viewDidLoad()
 
 		configureToolbar()
-
-		TodoListDBManager.setTodoList()
+		
+		TodoListDBManager.shared.setTodoList()
+		
     }
 
 	override func configureView() {
@@ -85,7 +86,7 @@ extension CategoryListViewController: UICollectionViewDelegate, UICollectionView
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as! CategoryCollectionViewCell
 
-		cell.categoryCountLabel.text = String(describing: TodoListDBManager.todoList.count)
+		cell.categoryCountLabel.text = "\(TodoListDBManager.shared.todoList.count)"
 		cell.categoryTitleLabel.text = categoryList[indexPath.row]
 
 
