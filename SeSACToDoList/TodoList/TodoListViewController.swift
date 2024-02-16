@@ -33,6 +33,7 @@ class TodoListViewController: BaseViewController {
 		mainView.todoListTableView.delegate = self
 		mainView.todoListTableView.dataSource = self
 		mainView.todoListTableView.register(TodoListTableViewCell.self, forCellReuseIdentifier: "TodoListTableViewCell")
+		mainView.todoListTableView.rowHeight = 120
 	}
 
 	@objc func rightBarButtonItemClicked() {
@@ -78,7 +79,19 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		list.count
 	}
+
+	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		60
+	}
+
 	
+
+	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		let view = TodoListTableHeaderView()
+		view.titleLabel.text = "전체"
+		return view
+	}
+
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TodoListTableViewCell", for: indexPath) as! TodoListTableViewCell
 
@@ -87,6 +100,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 
 		return cell
 	}
-	
+
+
 
 }

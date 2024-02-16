@@ -27,6 +27,7 @@ class TodoListView: BaseView {
 
 	override func configureView() {
 		todoListTableView.backgroundColor = .brown
+		todoListTableView.sectionHeaderTopPadding = 0
 	}
 
 }
