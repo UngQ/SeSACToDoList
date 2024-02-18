@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import Toast
 
 enum OptionType: Int, CaseIterable {
 	case date
@@ -17,11 +18,11 @@ enum OptionType: Int, CaseIterable {
 	var title: String {
 		switch self {
 		case .date:
-			"마감일"
+			"마감일 (선택):"
 		case .tag:
-			"태그"
+			"태그 (선택):"
 		case .priority:
-			"우선 순위"
+			"우선 순위: 없음"
 		case .image:
 			"이미지 추가 (작업 중)"
 		}
@@ -46,7 +47,7 @@ class AddTodoViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
+		let saveButton = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(saveButtonClicked))
 		navigationItem.rightBarButtonItem = saveButton
 
 		NotificationCenter.default.addObserver(self,
@@ -63,14 +64,26 @@ class AddTodoViewController: BaseViewController {
 		mainView.optionTableView.register(OptionTableViewCell.self, forCellReuseIdentifier: "OptionTableViewCell")
 	}
 
+
 	@objc func saveButtonClicked() {
+
+		guard mainView.titleTextField.text != "" else {
+			self.view.makeToast("", position: .top, title: "제목은 필수사항 입니다!")
+			return }
+
 		let realm = try! Realm()
+
+		var memo = mainView.memoTextView.text
+
+		if mainView.memoTextView.text == "메모 (선택)" {
+			memo = nil
+		}
 
 		let data = TodoTable(regDate: Date(),
 							 title: mainView.titleTextField.text!,
-							 memo: mainView.memoTextView.text,
-							 endDate: endDate ?? Date(),
-							 tag: tag ?? "",
+							 memo: memo,
+							 endDate: endDate,
+							 tag: tag,
 							 priority: priority ?? 0)
 
 		try! realm.write {
@@ -129,6 +142,7 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 			vc.valueSpace = { value in
 				let cell = self.mainView.optionTableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as! OptionTableViewCell
 
+				print(value)
 				if let date = value.toDate() {
 					self.endDate = date
 					print(date)
@@ -188,7 +202,7 @@ extension AddTodoViewController: UITextViewDelegate {
 
 	func textViewDidEndEditing(_ textView: UITextView) {
 		if textView.text.isEmpty {
-			textView.text = "메모"
+			textView.text = "메모 (선택)"
 			textView.textColor = .lightGray
 		}
 	}

@@ -10,7 +10,13 @@ import SnapKit
 
 class TodoListTableViewCell: UITableViewCell {
 
+	let checkButton = UIButton()
+	let priorityLabel = UILabel()
 	let titleLabel = UILabel()
+	let memoLabel = UILabel()
+	let endDateLabel = UILabel()
+	let tagLabel = UILabel()
+
 
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -21,16 +27,84 @@ class TodoListTableViewCell: UITableViewCell {
 	}
 
 	func configureHierarchy() {
+		contentView.addSubview(checkButton)
+		contentView.addSubview(priorityLabel)
 		contentView.addSubview(titleLabel)
+		contentView.addSubview(memoLabel)
+		contentView.addSubview(endDateLabel)
+		contentView.addSubview(tagLabel)
 	}
 
 	func configureLayout() {
+
+		checkButton.snp.makeConstraints { make in
+			make.top.equalToSuperview().offset(8)
+			make.leading.equalToSuperview().offset(8)
+			make.size.equalTo(20)
+		}
+
+
+
+
+		priorityLabel.snp.makeConstraints { make in
+			make.trailing.equalToSuperview().offset(-8)
+			make.top.equalToSuperview().offset(8)
+			make.height.equalTo(20)
+			make.width.greaterThanOrEqualTo(0)
+		}
+
+
+
 		titleLabel.snp.makeConstraints { make in
-			make.edges.equalToSuperview()
+			make.leading.equalTo(checkButton.snp.trailing).offset(4)
+			make.trailing.equalTo(priorityLabel.snp.leading).offset(-4)
+			make.top.equalToSuperview().offset(8)
+			make.height.equalTo(20)
+
+
+		}
+
+		memoLabel.snp.makeConstraints { make in
+			make.leading.equalTo(checkButton.snp.trailing).offset(4)
+			make.top.equalTo(titleLabel.snp.bottom).offset(4)
+			make.trailing.equalToSuperview().offset(-4)
+			make.height.greaterThanOrEqualTo(0)
+		}
+
+		endDateLabel.snp.makeConstraints { make in
+			make.leading.equalTo(checkButton.snp.trailing).offset(4)
+			make.top.equalTo(memoLabel.snp.bottom).offset(4)
+			make.height.greaterThanOrEqualTo(0)
+			make.width.greaterThanOrEqualTo(0)
+		}
+
+		tagLabel.snp.makeConstraints { make in
+			make.leading.equalTo(endDateLabel.snp.trailing)
+			make.top.equalTo(memoLabel.snp.bottom).offset(4)
+			make.trailing.equalToSuperview().offset(-4)
+			make.height.greaterThanOrEqualTo(0)
 		}
 	}
 
 	func configureCell() {
+		backgroundColor = .clear
+
+		titleLabel.textColor = .white
+		priorityLabel.textColor = .yellow
+		memoLabel.textColor = .lightGray
+		endDateLabel.textColor = .white
+		tagLabel.textColor = .link
+
+		titleLabel.font = .boldSystemFont(ofSize: 15)
+		priorityLabel.font = .boldSystemFont(ofSize: 15)
+		memoLabel.font = .systemFont(ofSize: 13)
+		endDateLabel.font = .systemFont(ofSize: 13)
+		tagLabel.font = .boldSystemFont(ofSize: 13)
+
+
+	
+
+
 
 	}
 

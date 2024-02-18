@@ -53,8 +53,9 @@ class CategoryCollectionViewCell: UICollectionViewCell {
 
 		let cornerRadius = (UIScreen.main.bounds.width - (12 * 3)) / 16
 		categoryImageView.layer.cornerRadius = cornerRadius
-		categoryImageView.image = UIImage(systemName: "calendar.circle.fill")
-		categoryImageView.tintColor = .orange
+		categoryImageView.layer.borderColor = UIColor.darkGray.cgColor
+		categoryImageView.layer.borderWidth = 3
+		categoryImageView.layer.masksToBounds = true
 
 
 		categoryTitleLabel.textColor = .lightGray

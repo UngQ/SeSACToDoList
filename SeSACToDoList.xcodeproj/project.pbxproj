@@ -15,6 +15,8 @@
 		A5701EF62B7CAB6000F126B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5701EF42B7CAB6000F126B0 /* LaunchScreen.storyboard */; };
 		A5701EFF2B7CABA600F126B0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5701EFE2B7CABA600F126B0 /* BaseViewController.swift */; };
 		A5B619CA2B7F75E4005783F4 /* TodoListTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619C92B7F75E4005783F4 /* TodoListTableHeaderView.swift */; };
+		A5B619CD2B81F4C8005783F4 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = A5B619CC2B81F4C8005783F4 /* Toast */; };
+		A5B619CF2B8208E5005783F4 /* StringStrike.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619CE2B8208E5005783F4 /* StringStrike.swift */; };
 		A5B9D1852B7CD023008E4C8E /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1842B7CD023008E4C8E /* CategoryListViewController.swift */; };
 		A5B9D1872B7CD033008E4C8E /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1862B7CD033008E4C8E /* BaseView.swift */; };
 		A5B9D1892B7CD03D008E4C8E /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1882B7CD03D008E4C8E /* CategoryListView.swift */; };
@@ -33,7 +35,7 @@
 		A5B9D1BD2B7EABB3008E4C8E /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1BC2B7EABB3008E4C8E /* TodoListViewController.swift */; };
 		A5B9D1BF2B7EABC3008E4C8E /* TodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1BE2B7EABC3008E4C8E /* TodoListView.swift */; };
 		A5B9D1C22B7EAD94008E4C8E /* TodoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1C12B7EAD94008E4C8E /* TodoListTableViewCell.swift */; };
-		A5B9D1C52B7EB1FE008E4C8E /* TodoListDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1C42B7EB1FE008E4C8E /* TodoListDBManager.swift */; };
+		A5B9D1C52B7EB1FE008E4C8E /* TodoListTableRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1C42B7EB1FE008E4C8E /* TodoListTableRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,7 @@
 		A5701EF72B7CAB6000F126B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5701EFE2B7CABA600F126B0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A5B619C92B7F75E4005783F4 /* TodoListTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTableHeaderView.swift; sourceTree = "<group>"; };
+		A5B619CE2B8208E5005783F4 /* StringStrike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringStrike.swift; sourceTree = "<group>"; };
 		A5B9D1842B7CD023008E4C8E /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		A5B9D1862B7CD033008E4C8E /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		A5B9D1882B7CD03D008E4C8E /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
@@ -62,7 +65,7 @@
 		A5B9D1BC2B7EABB3008E4C8E /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		A5B9D1BE2B7EABC3008E4C8E /* TodoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListView.swift; sourceTree = "<group>"; };
 		A5B9D1C12B7EAD94008E4C8E /* TodoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTableViewCell.swift; sourceTree = "<group>"; };
-		A5B9D1C42B7EB1FE008E4C8E /* TodoListDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListDBManager.swift; sourceTree = "<group>"; };
+		A5B9D1C42B7EB1FE008E4C8E /* TodoListTableRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTableRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5B619CD2B81F4C8005783F4 /* Toast in Frameworks */,
 				A5B9D1B62B7DFD21008E4C8E /* RealmSwift in Frameworks */,
 				A5B9D1B42B7DFD21008E4C8E /* Realm in Frameworks */,
 				A5B9D18C2B7CD105008E4C8E /* SnapKit in Frameworks */,
@@ -100,7 +104,7 @@
 			children = (
 				A5B9D1AC2B7DFC98008E4C8E /* Realm */,
 				A5701EFD2B7CAB8F00F126B0 /* Base */,
-				A5B9D1C32B7EB19A008E4C8E /* TodoListDB */,
+				A5B9D1C32B7EB19A008E4C8E /* Repository */,
 				A5B9D1832B7CD00C008E4C8E /* CategoryList */,
 				A5B9D1BB2B7EAB9F008E4C8E /* TodoList */,
 				A5B9D18D2B7CD3E9008E4C8E /* AddTodo */,
@@ -160,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				A5B9D1B92B7EA233008E4C8E /* DateFormat.swift */,
+				A5B619CE2B8208E5005783F4 /* StringStrike.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -199,12 +204,12 @@
 			path = TableViewCell;
 			sourceTree = "<group>";
 		};
-		A5B9D1C32B7EB19A008E4C8E /* TodoListDB */ = {
+		A5B9D1C32B7EB19A008E4C8E /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				A5B9D1C42B7EB1FE008E4C8E /* TodoListDBManager.swift */,
+				A5B9D1C42B7EB1FE008E4C8E /* TodoListTableRepository.swift */,
 			);
-			path = TodoListDB;
+			path = Repository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,6 +232,7 @@
 				A5B9D18B2B7CD105008E4C8E /* SnapKit */,
 				A5B9D1B32B7DFD21008E4C8E /* Realm */,
 				A5B9D1B52B7DFD21008E4C8E /* RealmSwift */,
+				A5B619CC2B81F4C8005783F4 /* Toast */,
 			);
 			productName = SeSACToDoList;
 			productReference = A5701EE62B7CAB5E00F126B0 /* SeSACToDoList.app */;
@@ -259,6 +265,7 @@
 			packageReferences = (
 				A5B9D18A2B7CD105008E4C8E /* XCRemoteSwiftPackageReference "SnapKit" */,
 				A5B9D1B22B7DFD21008E4C8E /* XCRemoteSwiftPackageReference "realm-swift" */,
+				A5B619CB2B81F4C8005783F4 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = A5701EE72B7CAB5E00F126B0 /* Products */;
 			projectDirPath = "";
@@ -291,6 +298,7 @@
 				A5701EEE2B7CAB5F00F126B0 /* ViewController.swift in Sources */,
 				A5B9D1BA2B7EA233008E4C8E /* DateFormat.swift in Sources */,
 				A5701EFF2B7CABA600F126B0 /* BaseViewController.swift in Sources */,
+				A5B619CF2B8208E5005783F4 /* StringStrike.swift in Sources */,
 				A5B9D1912B7CD412008E4C8E /* AddTodoView.swift in Sources */,
 				A5701EEA2B7CAB5F00F126B0 /* AppDelegate.swift in Sources */,
 				A5B9D1872B7CD033008E4C8E /* BaseView.swift in Sources */,
@@ -300,7 +308,7 @@
 				A5701EEC2B7CAB5F00F126B0 /* SceneDelegate.swift in Sources */,
 				A5B9D1962B7CDB97008E4C8E /* OptionTableViewCell.swift in Sources */,
 				A5B9D19B2B7D0F70008E4C8E /* TagViewController.swift in Sources */,
-				A5B9D1C52B7EB1FE008E4C8E /* TodoListDBManager.swift in Sources */,
+				A5B9D1C52B7EB1FE008E4C8E /* TodoListTableRepository.swift in Sources */,
 				A5B9D1BD2B7EABB3008E4C8E /* TodoListViewController.swift in Sources */,
 				A5B9D1BF2B7EABC3008E4C8E /* TodoListView.swift in Sources */,
 				A5B9D1852B7CD023008E4C8E /* CategoryListViewController.swift in Sources */,
@@ -540,6 +548,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A5B619CB2B81F4C8005783F4 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
 		A5B9D18A2B7CD105008E4C8E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -559,6 +575,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A5B619CC2B81F4C8005783F4 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B619CB2B81F4C8005783F4 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
 		A5B9D18B2B7CD105008E4C8E /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A5B9D18A2B7CD105008E4C8E /* XCRemoteSwiftPackageReference "SnapKit" */;

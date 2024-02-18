@@ -9,15 +9,26 @@ import UIKit
 
 enum PriorityType: Int, CaseIterable {
 
+	case none
 	case upper
 	case middle
 	case lower
 
 	var value: String {
 		switch self {
+		case .none: "없음"
 		case .upper: "상"
 		case .middle: "중"
 		case .lower: "하"
+		}
+	}
+
+	var symbol: String {
+		switch self {
+		case .none: ""
+		case .upper: "★★★"
+		case .middle: "★★"
+		case .lower: "★"
 		}
 	}
 

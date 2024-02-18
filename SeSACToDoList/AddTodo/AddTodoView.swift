@@ -67,7 +67,7 @@ class AddTodoView: BaseView {
 
 		titleTextField.font = .systemFont(ofSize: 15)
 		titleTextField.textColor = .white
-		titleTextField.attributedPlaceholder = NSAttributedString(string: "제목", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+		titleTextField.attributedPlaceholder = NSAttributedString(string: "제목 (필수)", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
 
 		lineView.backgroundColor = .lightGray
 
@@ -76,7 +76,7 @@ class AddTodoView: BaseView {
 		memoTextView.font = .systemFont(ofSize: 14)
 		memoTextView.textContainerInset = UIEdgeInsets(top: 2, left: 4, bottom: 8, right: 4	)
 //		memoTextView.textContainer.lineFragmentPadding = 0
-		memoTextView.text = "메모"
+		memoTextView.text = "메모 (선택)"
 		memoTextView.textColor = .lightGray
 
 		optionTableView.backgroundColor = .clear
