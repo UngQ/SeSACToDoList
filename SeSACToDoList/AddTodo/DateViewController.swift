@@ -20,10 +20,10 @@ class DateViewController: BaseViewController {
 
 
     }
-
-	override func viewDidAppear(_ animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		userTextField.becomeFirstResponder()
 	}
+
 
 	override func configureHierarchy() {
 		view.addSubview(userTextField)
@@ -50,7 +50,8 @@ class DateViewController: BaseViewController {
 		userTextField.borderStyle = .none
 		userTextField.textColor = .white
 		userTextField.backgroundColor = .clear
-		userTextField.attributedPlaceholder = NSAttributedString(string: "날짜를 선택해주세요.", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+		userTextField.text = Date().toString()
+//		userTextField.attributedPlaceholder = NSAttributedString(string: "날짜를 선택해주세요.", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
 		userTextField.font = .boldSystemFont(ofSize: 24)
 		userTextField.textAlignment = .center
 		userTextField.tintColor = .clear

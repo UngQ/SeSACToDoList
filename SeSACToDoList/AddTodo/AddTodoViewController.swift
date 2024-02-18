@@ -35,6 +35,12 @@ class AddTodoViewController: BaseViewController {
 
 	let mainView = AddTodoView()
 
+	let repository = TodoListTableRepository()
+
+	//true일 경우, 수정 화면
+	var addOrModify = false
+	var item: TodoTable?
+
 	var endDate: Date?
 	var tag: String?
 	var priority: Int?
@@ -44,11 +50,30 @@ class AddTodoViewController: BaseViewController {
 		view = mainView
 	}
 
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		if let selectedIndexPath = mainView.optionTableView.indexPathForSelectedRow {
+			mainView.optionTableView.deselectRow(at: selectedIndexPath, animated: animated)
+		}
+
+	}
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		let saveButton = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(saveButtonClicked))
-		navigationItem.rightBarButtonItem = saveButton
+		if addOrModify == false {
+			let saveButton = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(saveButtonClicked))
+			navigationItem.rightBarButtonItem = saveButton
+		} else {
+			let modifyButton = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(modifyButtonClicked))
+			navigationItem.rightBarButtonItem = modifyButton
+
+
+			mainView.titleTextField.text = item?.title
+			mainView.memoTextView.text = item?.memo
+			print(item?.priority)
+
+		}
 
 		NotificationCenter.default.addObserver(self,
 											   selector: #selector(tagReceivedNotification),
@@ -71,8 +96,6 @@ class AddTodoViewController: BaseViewController {
 			self.view.makeToast("", position: .top, title: "제목은 필수사항 입니다!")
 			return }
 
-		let realm = try! Realm()
-
 		var memo = mainView.memoTextView.text
 
 		if mainView.memoTextView.text == "메모 (선택)" {
@@ -86,12 +109,29 @@ class AddTodoViewController: BaseViewController {
 							 tag: tag,
 							 priority: priority ?? 0)
 
-		try! realm.write {
-			realm.add(data)
-			print(data)
-		}
+		repository.createItem(data)
 
 		navigationController?.popViewController(animated: true)
+
+	}
+
+	@objc func modifyButtonClicked() {
+
+		guard mainView.titleTextField.text != "" else {
+			self.view.makeToast("", position: .top, title: "제목은 필수사항 입니다!")
+			return }
+
+		var memo = mainView.memoTextView.text
+
+		if mainView.memoTextView.text == "메모 (선택)" {
+			memo = nil
+		}
+
+		print("수정")
+		repository.updateItem(id: item!.id, title: mainView.titleTextField.text!, memo: memo, endDate: endDate ?? nil, tag: tag ?? nil, priority: priority ?? 0)
+
+		navigationController?.popViewController(animated: true)
+
 
 	}
 }
@@ -117,13 +157,31 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "OptionTableViewCell", for: indexPath) as! OptionTableViewCell
 		cell.titleLabel.text = OptionType.allCases[indexPath.section].title
-//		cell.selectionStyle = .none
+
+		switch OptionType.allCases[indexPath.section] {
+		case .date:
+			if self.endDate != nil  {
+				cell.titleLabel.text = "마감일: \(self.endDate!.toString())"
+			}
+		case .tag:
+			if self.tag != nil {
+				cell.titleLabel.text = "태그: #\(tag!)"
+			}
+		case .priority:
+			if self.priority != nil {
+				cell.titleLabel.text = "우선 순위: \(PriorityType.allCases[priority!].value)"
+			}
+		case .image:
+			cell //공사중
+		}
+
 		return cell
 	}
 
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 60
 	}
+
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 	

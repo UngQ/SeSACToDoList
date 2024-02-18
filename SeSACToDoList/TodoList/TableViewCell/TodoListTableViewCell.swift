@@ -92,7 +92,7 @@ class TodoListTableViewCell: UITableViewCell {
 		titleLabel.textColor = .white
 		priorityLabel.textColor = .yellow
 		memoLabel.textColor = .lightGray
-		endDateLabel.textColor = .white
+		endDateLabel.textColor = .lightGray
 		tagLabel.textColor = .link
 
 		titleLabel.font = .boldSystemFont(ofSize: 15)

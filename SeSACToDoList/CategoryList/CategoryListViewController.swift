@@ -195,19 +195,22 @@ extension CategoryListViewController: UICollectionViewDelegate, UICollectionView
 		switch CategoryDefaultType.allCases[indexPath.row] {
 		case .total:
 			vc.list = repository.fetchTotal()
-
+			vc.base = repository.fetchTotal
 		case .today:
 			vc.list = repository.fetchToday()
+			vc.base = repository.fetchToday
 
 		case .schedule:
 			vc.list = repository.fetchSchedule()
+			vc.base = repository.fetchSchedule
 
 
 		case .important:
 			vc.list = repository.fetchImportant()
-
+			vc.base = repository.fetchImportant
 		case .completed:
 			vc.list = repository.fetchCompleted()
+			vc.base = repository.fetchCompleted
 		}
 
 		navigationController?.pushViewController(vc, animated: true)

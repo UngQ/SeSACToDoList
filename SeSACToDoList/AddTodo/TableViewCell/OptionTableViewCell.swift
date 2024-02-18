@@ -44,8 +44,7 @@ class OptionTableViewCell: UITableViewCell {
 //			make.height.equalTo(48)
 //		}
 
-		backgroundColor = .clear
-
+		layer.masksToBounds = true
 		layer.cornerRadius = 6
 		backgroundColor = .darkGray
 
