@@ -70,7 +70,9 @@ class AddTodoViewController: BaseViewController {
 
 
 			mainView.titleTextField.text = item?.title
-			mainView.memoTextView.text = item?.memo
+			if item?.memo != nil {
+				mainView.memoTextView.text = item?.memo
+			}
 			print(item?.priority)
 
 		}
