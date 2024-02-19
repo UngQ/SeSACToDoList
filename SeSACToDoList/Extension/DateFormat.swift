@@ -10,9 +10,9 @@ import Foundation
 extension String {
 	func toDate() -> Date? { //"yyyy-MM-dd HH:mm:ss"
 		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "yyyy. MM. dd."
-		dateFormatter.locale = Locale(identifier: "ko_KR")
-		dateFormatter.timeZone = TimeZone(identifier: "KST")
+		dateFormatter.dateFormat = "yyyy년 MM월 dd일 HH시 mm분"
+//		dateFormatter.locale = Locale(identifier: "ko_KR")
+//		dateFormatter.timeZone = TimeZone(identifier: "KST")
 		if let date = dateFormatter.date(from: self) {
 			return date
 		} else {
@@ -24,17 +24,17 @@ extension String {
 extension Date {
 	func toString() -> String {
 		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "yyyy. MM. dd."
-		dateFormatter.locale = Locale(identifier: "ko_KR")
-		dateFormatter.timeZone = TimeZone(identifier: "KST")
+		dateFormatter.dateFormat = "yyyy년 MM월 dd일 HH시 mm분"
+//		dateFormatter.locale = Locale(identifier: "ko_KR")
+//		dateFormatter.timeZone = TimeZone(identifier: "KST")
 		return dateFormatter.string(from: self)
 	}
 
 	func pickupDayString() -> String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "dd"
-		dateFormatter.locale = Locale(identifier: "ko_KR")
-		dateFormatter.timeZone = TimeZone(identifier: "KST")
+//		dateFormatter.locale = Locale(identifier: "ko_KR")
+//		dateFormatter.timeZone = TimeZone(identifier: "KST")
 		return dateFormatter.string(from: self)
 	}
 }

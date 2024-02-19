@@ -17,6 +17,8 @@
 		A5B619CA2B7F75E4005783F4 /* TodoListTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619C92B7F75E4005783F4 /* TodoListTableHeaderView.swift */; };
 		A5B619CD2B81F4C8005783F4 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = A5B619CC2B81F4C8005783F4 /* Toast */; };
 		A5B619CF2B8208E5005783F4 /* StringStrike.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619CE2B8208E5005783F4 /* StringStrike.swift */; };
+		A5B619D52B832EB7005783F4 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = A5B619D42B832EB7005783F4 /* FSCalendar */; };
+		A5B619D72B839013005783F4 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619D62B839013005783F4 /* ImageViewController.swift */; };
 		A5B9D1852B7CD023008E4C8E /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1842B7CD023008E4C8E /* CategoryListViewController.swift */; };
 		A5B9D1872B7CD033008E4C8E /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1862B7CD033008E4C8E /* BaseView.swift */; };
 		A5B9D1892B7CD03D008E4C8E /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1882B7CD03D008E4C8E /* CategoryListView.swift */; };
@@ -50,6 +52,7 @@
 		A5701EFE2B7CABA600F126B0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A5B619C92B7F75E4005783F4 /* TodoListTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTableHeaderView.swift; sourceTree = "<group>"; };
 		A5B619CE2B8208E5005783F4 /* StringStrike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringStrike.swift; sourceTree = "<group>"; };
+		A5B619D62B839013005783F4 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		A5B9D1842B7CD023008E4C8E /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		A5B9D1862B7CD033008E4C8E /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		A5B9D1882B7CD03D008E4C8E /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
@@ -76,6 +79,7 @@
 				A5B619CD2B81F4C8005783F4 /* Toast in Frameworks */,
 				A5B9D1B62B7DFD21008E4C8E /* RealmSwift in Frameworks */,
 				A5B9D1B42B7DFD21008E4C8E /* Realm in Frameworks */,
+				A5B619D52B832EB7005783F4 /* FSCalendar in Frameworks */,
 				A5B9D18C2B7CD105008E4C8E /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,6 +152,7 @@
 				A5B9D1982B7CFF1E008E4C8E /* DateViewController.swift */,
 				A5B9D19A2B7D0F70008E4C8E /* TagViewController.swift */,
 				A5B9D19C2B7D124E008E4C8E /* PriorityViewController.swift */,
+				A5B619D62B839013005783F4 /* ImageViewController.swift */,
 			);
 			path = AddTodo;
 			sourceTree = "<group>";
@@ -233,6 +238,7 @@
 				A5B9D1B32B7DFD21008E4C8E /* Realm */,
 				A5B9D1B52B7DFD21008E4C8E /* RealmSwift */,
 				A5B619CC2B81F4C8005783F4 /* Toast */,
+				A5B619D42B832EB7005783F4 /* FSCalendar */,
 			);
 			productName = SeSACToDoList;
 			productReference = A5701EE62B7CAB5E00F126B0 /* SeSACToDoList.app */;
@@ -266,6 +272,7 @@
 				A5B9D18A2B7CD105008E4C8E /* XCRemoteSwiftPackageReference "SnapKit" */,
 				A5B9D1B22B7DFD21008E4C8E /* XCRemoteSwiftPackageReference "realm-swift" */,
 				A5B619CB2B81F4C8005783F4 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				A5B619D32B832EB7005783F4 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = A5701EE72B7CAB5E00F126B0 /* Products */;
 			projectDirPath = "";
@@ -300,6 +307,7 @@
 				A5701EFF2B7CABA600F126B0 /* BaseViewController.swift in Sources */,
 				A5B619CF2B8208E5005783F4 /* StringStrike.swift in Sources */,
 				A5B9D1912B7CD412008E4C8E /* AddTodoView.swift in Sources */,
+				A5B619D72B839013005783F4 /* ImageViewController.swift in Sources */,
 				A5701EEA2B7CAB5F00F126B0 /* AppDelegate.swift in Sources */,
 				A5B9D1872B7CD033008E4C8E /* BaseView.swift in Sources */,
 				A5B9D18F2B7CD404008E4C8E /* AddTodoViewController.swift in Sources */,
@@ -556,6 +564,14 @@
 				minimumVersion = 5.1.0;
 			};
 		};
+		A5B619D32B832EB7005783F4 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
 		A5B9D18A2B7CD105008E4C8E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -579,6 +595,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A5B619CB2B81F4C8005783F4 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
+		};
+		A5B619D42B832EB7005783F4 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B619D32B832EB7005783F4 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
 		};
 		A5B9D18B2B7CD105008E4C8E /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -24,12 +24,12 @@ class TodoListTableRepository {
 	}
 
 
-	func updateItem(id: ObjectId, title: String, memo: String?, endDate: Date?, tag: String?, priority: Int) {
+	func updateItem(id: ObjectId, title: String, memo: String? = nil, endDate: Date? = nil, tag: String? = nil, priority: Int) {
 		do {
 			try realm.write {
 				realm.create(TodoTable.self,
 							 value: ["id": id,
-								"title": title,
+									 "title": title,
 									 "memo": memo,
 									 "endDate": endDate,
 									 "tag": tag,
@@ -46,21 +46,17 @@ class TodoListTableRepository {
 	}
 
 	func fetchToday() -> Results<TodoTable> {
-		let date = Date().toString()
-		let result = date.toDate()
+		let start = Calendar.current.startOfDay(for: Date())
+		let end: Date = Calendar.current.date(byAdding: .day, value: 1, to: start) ?? Date()
+		let predicate = NSPredicate(format: "endDate >= %@ && endDate < %@", start as NSDate, end as NSDate)
 
-		return realm.objects(TodoTable.self).where {
-			$0.endDate == result
-		}
+		return realm.objects(TodoTable.self).filter(predicate)
 	}
 
 	func fetchSchedule() -> Results<TodoTable> {
-		let date = Date().toString()
-		let result = date.toDate()
-
-		return realm.objects(TodoTable.self).where {
-			$0.endDate > result
-		}
+		
+		let predicate = NSPredicate(format: "endDate > %@", Date() as NSDate)
+		return realm.objects(TodoTable.self).filter(predicate)
 	}
 
 	func fetchImportant() -> Results<TodoTable> {

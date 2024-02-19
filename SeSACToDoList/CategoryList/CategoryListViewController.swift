@@ -158,8 +158,6 @@ extension CategoryListViewController: UICollectionViewDelegate, UICollectionView
 		cell.categoryImageView.tintColor = CategoryDefaultType.allCases[indexPath.row].tint
 		cell.categoryImageView.backgroundColor = .white
 
-//		categoryImageView.tintColor = .orange
-
 		let index = indexPath.row
 
 		switch CategoryDefaultType.allCases[index] {
@@ -199,12 +197,9 @@ extension CategoryListViewController: UICollectionViewDelegate, UICollectionView
 		case .today:
 			vc.list = repository.fetchToday()
 			vc.base = repository.fetchToday
-
 		case .schedule:
 			vc.list = repository.fetchSchedule()
 			vc.base = repository.fetchSchedule
-
-
 		case .important:
 			vc.list = repository.fetchImportant()
 			vc.base = repository.fetchImportant

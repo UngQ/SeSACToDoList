@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import FSCalendar
 
 class TodoListViewController: BaseViewController {
 
@@ -32,6 +33,9 @@ class TodoListViewController: BaseViewController {
 
 	override func configureView() {
 		addPullDownButtonToNavigationBar()
+
+		mainView.calendar.delegate = self
+		mainView.calendar.dataSource = self
 
 		mainView.todoListTableView.delegate = self
 		mainView.todoListTableView.dataSource = self
@@ -166,5 +170,37 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 
 
 
+
+}
+
+
+extension TodoListViewController: FSCalendarDelegate, FSCalendarDataSource {
+
+	func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+
+		let start = Calendar.current.startOfDay(for: date)
+
+		let end = Calendar.current.date(byAdding: .day, value: 1, to: start)!
+
+		let predicate = NSPredicate(format: "endDate >= %@ && endDate < %@", start as NSDate, end as NSDate)
+
+		return base!().filter(predicate).count
+	}
+
+	func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+		//오늘 시작 날짜
+		let start = Calendar.current.startOfDay(for: date)
+
+		//내일 시작 날짜
+		let end: Date = Calendar.current.date(byAdding: .day, value: 1, to: start) ?? Date()
+
+		//쿼리 작성, 변순데 스트링이 들어갈경우 %@, 네모박스라고 생각
+		let predicate = NSPredicate(format: "endDate >= %@ && endDate < %@", start as NSDate, end as NSDate)
+
+		list = base!().filter(predicate)
+
+
+		mainView.todoListTableView.reloadData()
+	}
 
 }

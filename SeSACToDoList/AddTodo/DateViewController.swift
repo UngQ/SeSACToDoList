@@ -44,7 +44,10 @@ class DateViewController: BaseViewController {
 		navigationItem.rightBarButtonItem = saveButton
 
 		let datePicker = UIDatePicker()
-		datePicker.preferredDatePickerStyle = .inline
+		datePicker.preferredDatePickerStyle = .wheels
+		datePicker.datePickerMode = .dateAndTime
+		
+		datePicker.locale = NSLocale(localeIdentifier: "en_GB") as Locale
 		datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
 
 		userTextField.borderStyle = .none
@@ -60,9 +63,8 @@ class DateViewController: BaseViewController {
 	}
 
 	@objc func datePickerValueChanged(_ sender: UIDatePicker) {
-		let pickedDate = sender.date
-		userTextField.text = pickedDate.toString()
-
+		let pickedDate = sender.date.toString()
+		userTextField.text = pickedDate
 	}
 
 	@objc func saveButtonClicked() {

@@ -73,8 +73,7 @@ class AddTodoViewController: BaseViewController {
 			if item?.memo != nil {
 				mainView.memoTextView.text = item?.memo
 			}
-			print(item?.priority)
-
+		
 		}
 
 		NotificationCenter.default.addObserver(self,
@@ -130,7 +129,7 @@ class AddTodoViewController: BaseViewController {
 		}
 
 		print("수정")
-		repository.updateItem(id: item!.id, title: mainView.titleTextField.text!, memo: memo, endDate: endDate ?? nil, tag: tag ?? nil, priority: priority ?? 0)
+		repository.updateItem(id: item!.id, title: mainView.titleTextField.text!, memo: memo, endDate: endDate, tag: tag, priority: priority ?? 0)
 
 		navigationController?.popViewController(animated: true)
 
@@ -174,14 +173,21 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 				cell.titleLabel.text = "우선 순위: \(PriorityType.allCases[priority!].value)"
 			}
 		case .image:
-			cell //공사중
+			cell.backgroundColor = .blue
 		}
 
 		return cell
 	}
 
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		
+		if indexPath.section == OptionType.image.rawValue {
+			return 120
+		}
+
+
 		return 60
+
 	}
 
 
@@ -238,9 +244,37 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 
 				navigationController?.pushViewController(vc, animated: true)
 			}
-		}
 
-	
+		else if indexPath.section == OptionType.image.rawValue {
+
+			let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+			let gallery = UIAlertAction(title: "사진첩", style: .default) { action in
+
+				let vc = UIImagePickerController()
+
+				self.present(vc, animated: true)
+			}
+			let camera = UIAlertAction(title: "카메라", style: .default) { action in
+
+				let vc = UIImagePickerController()
+				vc.sourceType = .camera
+				self.present(vc, animated: true)
+			}
+			let web = UIAlertAction(title: "인터넷 검색", style: .default) { action in
+				print("네이버 이미지 검색")
+			}
+			let cancel = UIAlertAction(title: "취소", style: .cancel)
+
+			alert.addAction(gallery)
+			alert.addAction(camera)
+			alert.addAction(web)
+			alert.addAction(cancel)
+
+			present(alert, animated: true)
+
+		}
+	}
+
 
 	@objc func tagReceivedNotification(notification: NSNotification) {
 		let cell = self.mainView.optionTableView.cellForRow(at: IndexPath(row: 0, section: OptionType.tag.rawValue)) as! OptionTableViewCell
@@ -253,6 +287,9 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 
 }
+
+
+
 
 
 
@@ -289,4 +326,17 @@ extension AddTodoViewController: UITextViewDelegate {
 			}
 		}
 	}
+}
+
+
+
+extension AddTodoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+		dismiss(animated: true)
+	}
+
+//	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//		<#code#>
+//	}
 }
