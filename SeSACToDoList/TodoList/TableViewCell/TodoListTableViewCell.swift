@@ -17,6 +17,7 @@ class TodoListTableViewCell: UITableViewCell {
 	let endDateLabel = UILabel()
 	let tagLabel = UILabel()
 
+	let photoImageView = BaseImageView(frame: .zero)
 
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -33,6 +34,7 @@ class TodoListTableViewCell: UITableViewCell {
 		contentView.addSubview(memoLabel)
 		contentView.addSubview(endDateLabel)
 		contentView.addSubview(tagLabel)
+		contentView.addSubview(photoImageView)
 	}
 
 	func configureLayout() {
@@ -43,11 +45,15 @@ class TodoListTableViewCell: UITableViewCell {
 			make.size.equalTo(20)
 		}
 
+		photoImageView.snp.makeConstraints { make in
+			make.verticalEdges.trailing.equalToSuperview().inset(8)
+			make.width.equalTo(photoImageView.snp.height)
+		}
 
 
 
 		priorityLabel.snp.makeConstraints { make in
-			make.trailing.equalToSuperview().offset(-8)
+			make.trailing.equalTo(photoImageView.snp.leading).offset(-8)
 			make.top.equalToSuperview().offset(8)
 			make.height.equalTo(20)
 			make.width.greaterThanOrEqualTo(0)
@@ -60,8 +66,6 @@ class TodoListTableViewCell: UITableViewCell {
 			make.trailing.equalTo(priorityLabel.snp.leading).offset(-4)
 			make.top.equalToSuperview().offset(8)
 			make.height.equalTo(20)
-
-
 		}
 
 		memoLabel.snp.makeConstraints { make in
@@ -81,9 +85,10 @@ class TodoListTableViewCell: UITableViewCell {
 		tagLabel.snp.makeConstraints { make in
 			make.leading.equalTo(endDateLabel.snp.trailing)
 			make.top.equalTo(memoLabel.snp.bottom).offset(4)
-			make.trailing.equalToSuperview().offset(-4)
+			make.trailing.equalTo(photoImageView.snp.leading).offset(-4)
 			make.height.greaterThanOrEqualTo(0)
 		}
+
 	}
 
 	func configureCell() {
@@ -101,8 +106,7 @@ class TodoListTableViewCell: UITableViewCell {
 		endDateLabel.font = .systemFont(ofSize: 13)
 		tagLabel.font = .boldSystemFont(ofSize: 13)
 
-
-	
+		photoImageView.contentMode = .scaleAspectFill
 
 
 

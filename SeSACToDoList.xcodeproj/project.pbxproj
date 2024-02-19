@@ -18,7 +18,17 @@
 		A5B619CD2B81F4C8005783F4 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = A5B619CC2B81F4C8005783F4 /* Toast */; };
 		A5B619CF2B8208E5005783F4 /* StringStrike.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619CE2B8208E5005783F4 /* StringStrike.swift */; };
 		A5B619D52B832EB7005783F4 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = A5B619D42B832EB7005783F4 /* FSCalendar */; };
-		A5B619D72B839013005783F4 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619D62B839013005783F4 /* ImageViewController.swift */; };
+		A5B619D72B839013005783F4 /* ImageWebSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619D62B839013005783F4 /* ImageWebSearchViewController.swift */; };
+		A5B619D92B83A41D005783F4 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619D82B83A41D005783F4 /* FileManager.swift */; };
+		A5B619DB2B83B108005783F4 /* ImageWebSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619DA2B83B108005783F4 /* ImageWebSearchView.swift */; };
+		A5B619E12B83B1CD005783F4 /* ResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619E02B83B1CD005783F4 /* ResultCollectionViewCell.swift */; };
+		A5B619E52B83B2E7005783F4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A5B619E42B83B2E7005783F4 /* Kingfisher */; };
+		A5B619E82B83B300005783F4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A5B619E72B83B300005783F4 /* Alamofire */; };
+		A5B619EA2B83B364005783F4 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619E92B83B364005783F4 /* APIKey.swift */; };
+		A5B619EC2B83B37F005783F4 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A5B619EB2B83B37F005783F4 /* .gitignore */; };
+		A5B619EE2B83B3A0005783F4 /* NaverAPIManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619ED2B83B3A0005783F4 /* NaverAPIManger.swift */; };
+		A5B619F02B83B3B3005783F4 /* NaverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619EF2B83B3B3005783F4 /* NaverModel.swift */; };
+		A5B619F22B83B881005783F4 /* BaseImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619F12B83B881005783F4 /* BaseImageView.swift */; };
 		A5B9D1852B7CD023008E4C8E /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1842B7CD023008E4C8E /* CategoryListViewController.swift */; };
 		A5B9D1872B7CD033008E4C8E /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1862B7CD033008E4C8E /* BaseView.swift */; };
 		A5B9D1892B7CD03D008E4C8E /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1882B7CD03D008E4C8E /* CategoryListView.swift */; };
@@ -52,7 +62,15 @@
 		A5701EFE2B7CABA600F126B0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A5B619C92B7F75E4005783F4 /* TodoListTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTableHeaderView.swift; sourceTree = "<group>"; };
 		A5B619CE2B8208E5005783F4 /* StringStrike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringStrike.swift; sourceTree = "<group>"; };
-		A5B619D62B839013005783F4 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		A5B619D62B839013005783F4 /* ImageWebSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWebSearchViewController.swift; sourceTree = "<group>"; };
+		A5B619D82B83A41D005783F4 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		A5B619DA2B83B108005783F4 /* ImageWebSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWebSearchView.swift; sourceTree = "<group>"; };
+		A5B619E02B83B1CD005783F4 /* ResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCollectionViewCell.swift; sourceTree = "<group>"; };
+		A5B619E92B83B364005783F4 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		A5B619EB2B83B37F005783F4 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		A5B619ED2B83B3A0005783F4 /* NaverAPIManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverAPIManger.swift; sourceTree = "<group>"; };
+		A5B619EF2B83B3B3005783F4 /* NaverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverModel.swift; sourceTree = "<group>"; };
+		A5B619F12B83B881005783F4 /* BaseImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseImageView.swift; sourceTree = "<group>"; };
 		A5B9D1842B7CD023008E4C8E /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		A5B9D1862B7CD033008E4C8E /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		A5B9D1882B7CD03D008E4C8E /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
@@ -76,6 +94,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5B619E52B83B2E7005783F4 /* Kingfisher in Frameworks */,
+				A5B619E82B83B300005783F4 /* Alamofire in Frameworks */,
 				A5B619CD2B81F4C8005783F4 /* Toast in Frameworks */,
 				A5B9D1B62B7DFD21008E4C8E /* RealmSwift in Frameworks */,
 				A5B9D1B42B7DFD21008E4C8E /* Realm in Frameworks */,
@@ -90,6 +110,7 @@
 		A5701EDD2B7CAB5E00F126B0 = {
 			isa = PBXGroup;
 			children = (
+				A5B619EB2B83B37F005783F4 /* .gitignore */,
 				A5701EE82B7CAB5F00F126B0 /* SeSACToDoList */,
 				A5701EE72B7CAB5E00F126B0 /* Products */,
 			);
@@ -106,13 +127,14 @@
 		A5701EE82B7CAB5F00F126B0 /* SeSACToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				A5B619E22B83B296005783F4 /* Network */,
+				A5B9D1972B7CFEE5008E4C8E /* Extension */,
 				A5701EFD2B7CAB8F00F126B0 /* Base */,
 				A5B9D1AC2B7DFC98008E4C8E /* Realm */,
 				A5B9D1C32B7EB19A008E4C8E /* Repository */,
 				A5B9D1832B7CD00C008E4C8E /* CategoryList */,
 				A5B9D1BB2B7EAB9F008E4C8E /* TodoList */,
 				A5B9D18D2B7CD3E9008E4C8E /* AddTodo */,
-				A5B9D1972B7CFEE5008E4C8E /* Extension */,
 				A5701EE92B7CAB5F00F126B0 /* AppDelegate.swift */,
 				A5701EEB2B7CAB5F00F126B0 /* SceneDelegate.swift */,
 				A5701EED2B7CAB5F00F126B0 /* ViewController.swift */,
@@ -129,8 +151,37 @@
 			children = (
 				A5701EFE2B7CABA600F126B0 /* BaseViewController.swift */,
 				A5B9D1862B7CD033008E4C8E /* BaseView.swift */,
+				A5B619F12B83B881005783F4 /* BaseImageView.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		A5B619DC2B83B18A005783F4 /* ImageWebSearch */ = {
+			isa = PBXGroup;
+			children = (
+				A5B619D62B839013005783F4 /* ImageWebSearchViewController.swift */,
+				A5B619DA2B83B108005783F4 /* ImageWebSearchView.swift */,
+				A5B619DD2B83B19D005783F4 /* CollectionViewCell */,
+			);
+			path = ImageWebSearch;
+			sourceTree = "<group>";
+		};
+		A5B619DD2B83B19D005783F4 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A5B619E02B83B1CD005783F4 /* ResultCollectionViewCell.swift */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		A5B619E22B83B296005783F4 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A5B619E92B83B364005783F4 /* APIKey.swift */,
+				A5B619ED2B83B3A0005783F4 /* NaverAPIManger.swift */,
+				A5B619EF2B83B3B3005783F4 /* NaverModel.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		A5B9D1832B7CD00C008E4C8E /* CategoryList */ = {
@@ -152,7 +203,7 @@
 				A5B9D1982B7CFF1E008E4C8E /* DateViewController.swift */,
 				A5B9D19A2B7D0F70008E4C8E /* TagViewController.swift */,
 				A5B9D19C2B7D124E008E4C8E /* PriorityViewController.swift */,
-				A5B619D62B839013005783F4 /* ImageViewController.swift */,
+				A5B619DC2B83B18A005783F4 /* ImageWebSearch */,
 			);
 			path = AddTodo;
 			sourceTree = "<group>";
@@ -170,6 +221,7 @@
 			children = (
 				A5B9D1B92B7EA233008E4C8E /* DateFormat.swift */,
 				A5B619CE2B8208E5005783F4 /* StringStrike.swift */,
+				A5B619D82B83A41D005783F4 /* FileManager.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -239,6 +291,8 @@
 				A5B9D1B52B7DFD21008E4C8E /* RealmSwift */,
 				A5B619CC2B81F4C8005783F4 /* Toast */,
 				A5B619D42B832EB7005783F4 /* FSCalendar */,
+				A5B619E42B83B2E7005783F4 /* Kingfisher */,
+				A5B619E72B83B300005783F4 /* Alamofire */,
 			);
 			productName = SeSACToDoList;
 			productReference = A5701EE62B7CAB5E00F126B0 /* SeSACToDoList.app */;
@@ -273,6 +327,8 @@
 				A5B9D1B22B7DFD21008E4C8E /* XCRemoteSwiftPackageReference "realm-swift" */,
 				A5B619CB2B81F4C8005783F4 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				A5B619D32B832EB7005783F4 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				A5B619E32B83B2E7005783F4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				A5B619E62B83B300005783F4 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = A5701EE72B7CAB5E00F126B0 /* Products */;
 			projectDirPath = "";
@@ -288,6 +344,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5B619EC2B83B37F005783F4 /* .gitignore in Resources */,
 				A5701EF62B7CAB6000F126B0 /* LaunchScreen.storyboard in Resources */,
 				A5701EF32B7CAB6000F126B0 /* Assets.xcassets in Resources */,
 				A5701EF12B7CAB5F00F126B0 /* Main.storyboard in Resources */,
@@ -306,16 +363,22 @@
 				A5B9D1BA2B7EA233008E4C8E /* DateFormat.swift in Sources */,
 				A5701EFF2B7CABA600F126B0 /* BaseViewController.swift in Sources */,
 				A5B619CF2B8208E5005783F4 /* StringStrike.swift in Sources */,
+				A5B619DB2B83B108005783F4 /* ImageWebSearchView.swift in Sources */,
 				A5B9D1912B7CD412008E4C8E /* AddTodoView.swift in Sources */,
-				A5B619D72B839013005783F4 /* ImageViewController.swift in Sources */,
+				A5B619F22B83B881005783F4 /* BaseImageView.swift in Sources */,
+				A5B619EA2B83B364005783F4 /* APIKey.swift in Sources */,
+				A5B619D72B839013005783F4 /* ImageWebSearchViewController.swift in Sources */,
 				A5701EEA2B7CAB5F00F126B0 /* AppDelegate.swift in Sources */,
 				A5B9D1872B7CD033008E4C8E /* BaseView.swift in Sources */,
+				A5B619EE2B83B3A0005783F4 /* NaverAPIManger.swift in Sources */,
 				A5B9D18F2B7CD404008E4C8E /* AddTodoViewController.swift in Sources */,
+				A5B619E12B83B1CD005783F4 /* ResultCollectionViewCell.swift in Sources */,
 				A5B9D19D2B7D124E008E4C8E /* PriorityViewController.swift in Sources */,
 				A5B9D1892B7CD03D008E4C8E /* CategoryListView.swift in Sources */,
 				A5701EEC2B7CAB5F00F126B0 /* SceneDelegate.swift in Sources */,
 				A5B9D1962B7CDB97008E4C8E /* OptionTableViewCell.swift in Sources */,
 				A5B9D19B2B7D0F70008E4C8E /* TagViewController.swift in Sources */,
+				A5B619D92B83A41D005783F4 /* FileManager.swift in Sources */,
 				A5B9D1C52B7EB1FE008E4C8E /* TodoListTableRepository.swift in Sources */,
 				A5B9D1BD2B7EABB3008E4C8E /* TodoListViewController.swift in Sources */,
 				A5B9D1BF2B7EABC3008E4C8E /* TodoListView.swift in Sources */,
@@ -323,6 +386,7 @@
 				A5B9D1AB2B7DF763008E4C8E /* CategoryCollectionViewCell.swift in Sources */,
 				A5B9D1C22B7EAD94008E4C8E /* TodoListTableViewCell.swift in Sources */,
 				A5B9D1992B7CFF1E008E4C8E /* DateViewController.swift in Sources */,
+				A5B619F02B83B3B3005783F4 /* NaverModel.swift in Sources */,
 				A5B619CA2B7F75E4005783F4 /* TodoListTableHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,6 +636,22 @@
 				minimumVersion = 2.8.4;
 			};
 		};
+		A5B619E32B83B2E7005783F4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.0;
+			};
+		};
+		A5B619E62B83B300005783F4 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
 		A5B9D18A2B7CD105008E4C8E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -600,6 +680,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A5B619D32B832EB7005783F4 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
+		};
+		A5B619E42B83B2E7005783F4 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B619E32B83B2E7005783F4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		A5B619E72B83B300005783F4 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B619E62B83B300005783F4 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 		A5B9D18B2B7CD105008E4C8E /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

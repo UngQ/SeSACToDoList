@@ -15,7 +15,7 @@ class TodoListView: BaseView {
 	let calendar = FSCalendar()
 	let todoListTableView = UITableView()
 
-	override func configrueHierarchy() {
+	override func configureHierarchy() {
 		addSubview(calendar)
 		addSubview(todoListTableView)
 	}

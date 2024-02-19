@@ -19,7 +19,7 @@ class AddTodoView: BaseView {
 
 	let dateButton = UIButton()
 
-	override func configrueHierarchy() {
+	override func configureHierarchy() {
 		fakeView.addSubview(titleTextField)
 		fakeView.addSubview(lineView)
 		fakeView.addSubview(memoTextView)

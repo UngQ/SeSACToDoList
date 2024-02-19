@@ -105,6 +105,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 		cell.memoLabel.text = ""
 		cell.endDateLabel.text = ""
 		cell.tagLabel.text = ""
+		cell.photoImageView.isHidden = true
 
 		if let memo = list[indexPath.row].memo {
 			cell.memoLabel.text = memo
@@ -116,6 +117,11 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 
 		if let tag = list[indexPath.row].tag {
 			cell.tagLabel.text = "#\(tag)"
+		}
+
+		if let image = loadImageToDocument(filename: "\(list[indexPath.row].id)") {
+			cell.photoImageView.isHidden = false
+			cell.photoImageView.image = image
 		}
 
 		if list[indexPath.row].doOrNot == true {
@@ -141,6 +147,11 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 			vc.tag = self.list[indexPath.row].tag
 			vc.priority = self.list[indexPath.row].priority
 			
+			if let image = self.loadImageToDocument(filename: "\(self.list[indexPath.row].id)") {
+				vc.selectedImage = image
+			}
+			
+
 			self.navigationController?.pushViewController(vc, animated: true)
 		}
 

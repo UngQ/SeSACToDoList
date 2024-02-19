@@ -15,12 +15,12 @@ class BaseView: UIView {
 
 		backgroundColor = .black
 
-		configrueHierarchy()
+		configureHierarchy()
 		configureLayout()
 		configureView()
 	}
 
-	func configrueHierarchy() {
+	func configureHierarchy() {
 
 	}
 

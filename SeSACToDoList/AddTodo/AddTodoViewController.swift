@@ -24,14 +24,12 @@ enum OptionType: Int, CaseIterable {
 		case .priority:
 			"우선 순위: 없음"
 		case .image:
-			"이미지 추가 (작업 중)"
+			"이미지"
 		}
 	}
 }
 
 class AddTodoViewController: BaseViewController {
-
-	let optionTypeList = OptionType.allCases
 
 	let mainView = AddTodoView()
 
@@ -45,6 +43,8 @@ class AddTodoViewController: BaseViewController {
 	var tag: String?
 	var priority: Int?
 
+	var selectedImage: UIImage?
+	var selectedURL: URL?
 
 	override func loadView() {
 		view = mainView
@@ -73,7 +73,7 @@ class AddTodoViewController: BaseViewController {
 			if item?.memo != nil {
 				mainView.memoTextView.text = item?.memo
 			}
-		
+
 		}
 
 		NotificationCenter.default.addObserver(self,
@@ -110,6 +110,10 @@ class AddTodoViewController: BaseViewController {
 							 tag: tag,
 							 priority: priority ?? 0)
 
+		if let image = selectedImage {
+			saveImageToDocument(image: image, filename: "\(data.id)")
+		}
+
 		repository.createItem(data)
 
 		navigationController?.popViewController(animated: true)
@@ -129,6 +133,7 @@ class AddTodoViewController: BaseViewController {
 		}
 
 		print("수정")
+		saveImageToDocument(image: selectedImage!, filename: "\(item!.id)")
 		repository.updateItem(id: item!.id, title: mainView.titleTextField.text!, memo: memo, endDate: endDate, tag: tag, priority: priority ?? 0)
 
 		navigationController?.popViewController(animated: true)
@@ -173,7 +178,17 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 				cell.titleLabel.text = "우선 순위: \(PriorityType.allCases[priority!].value)"
 			}
 		case .image:
-			cell.backgroundColor = .blue
+
+
+			cell.photoImageView.isHidden = false
+			if let image = selectedImage {
+				cell.photoImageView.image = image
+				cell.photoImageView.contentMode = .scaleAspectFill
+			} else if let url = selectedURL {
+				cell.photoImageView.kf.setImage(with: url)
+				cell.photoImageView.contentMode = .scaleAspectFill
+			}
+
 		}
 
 		return cell
@@ -182,7 +197,7 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		
 		if indexPath.section == OptionType.image.rawValue {
-			return 120
+			return 170
 		}
 
 
@@ -251,7 +266,8 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 			let gallery = UIAlertAction(title: "사진첩", style: .default) { action in
 
 				let vc = UIImagePickerController()
-
+//				vc.allowsEditing = true
+				vc.delegate = self
 				self.present(vc, animated: true)
 			}
 			let camera = UIAlertAction(title: "카메라", style: .default) { action in
@@ -261,7 +277,16 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 				self.present(vc, animated: true)
 			}
 			let web = UIAlertAction(title: "인터넷 검색", style: .default) { action in
-				print("네이버 이미지 검색")
+
+				let vc = ImageWebSearchViewController()
+				vc.valueSpace = {
+					self.selectedURL = $0
+					self.selectedImage = nil
+					self.mainView.optionTableView.reloadRows(at: [IndexPath(row: 0, section: OptionType.image.rawValue)], with: .none)
+				}
+
+				self.present(vc, animated: true)
+
 			}
 			let cancel = UIAlertAction(title: "취소", style: .cancel)
 
@@ -336,7 +361,18 @@ extension AddTodoViewController: UIImagePickerControllerDelegate, UINavigationCo
 		dismiss(animated: true)
 	}
 
-//	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//		<#code#>
-//	}
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+		print(#function)
+		if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+
+			selectedImage = pickedImage
+			selectedURL = nil
+			mainView.optionTableView.reloadRows(at: [IndexPath(row: 0, section: OptionType.image.rawValue)], with: .none)
+		}
+
+
+
+		dismiss(animated: true)
+	}
 }

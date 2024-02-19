@@ -14,19 +14,19 @@ class OptionTableViewCell: UITableViewCell {
 	let titleLabel = UILabel()
 	let buttonImage = UIImageView()
 
-	
+	let photoImageView = BaseImageView(frame: .zero)
 
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 
 		contentView.addSubview(titleLabel)
 		contentView.addSubview(buttonImage)
+		contentView.addSubview(photoImageView)
 
-//		contentView.addSubview(fakeView)
 
 
 		titleLabel.snp.makeConstraints { make in
-			make.centerY.equalToSuperview()
+			make.top.equalToSuperview().offset(10)
 			make.leading.equalToSuperview().offset(8)
 			make.height.equalTo(40)
 			make.width.greaterThanOrEqualTo(160)
@@ -38,11 +38,14 @@ class OptionTableViewCell: UITableViewCell {
 			make.size.equalTo(16)
 
 		}
+		photoImageView.snp.makeConstraints { make in
+			make.top.equalTo(titleLabel.snp.bottom)
+			make.leading.equalToSuperview().offset(20)
+			make.size.equalTo(100)
 
-//		fakeView.snp.makeConstraints { make in
-//			make.top.horizontalEdges.equalToSuperview()
-//			make.height.equalTo(48)
-//		}
+		}
+
+
 
 		layer.masksToBounds = true
 		layer.cornerRadius = 6
@@ -53,7 +56,11 @@ class OptionTableViewCell: UITableViewCell {
 		titleLabel.font = .boldSystemFont(ofSize: 14)
 		buttonImage.image = UIImage(systemName: "chevron.right")
 
-	
+		photoImageView.image = UIImage(systemName: "photo.badge.plus.fill")
+//		photoImageView.contentMode = .
+		photoImageView.isHidden = true
+
+
 	}
 
 	required init?(coder: NSCoder) {

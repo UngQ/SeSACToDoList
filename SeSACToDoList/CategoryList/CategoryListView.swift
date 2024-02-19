@@ -16,7 +16,7 @@ class CategoryListView: BaseView {
 
 	}
 
-	override func configrueHierarchy() {
+	override func configureHierarchy() {
 		addSubview(categoryCollectionView)
 	}
 

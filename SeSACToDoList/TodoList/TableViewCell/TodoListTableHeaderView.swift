@@ -13,7 +13,7 @@ class TodoListTableHeaderView: BaseView {
 
 	let titleLabel = UILabel()
 
-	override func configrueHierarchy() {
+	override func configureHierarchy() {
 		addSubview(titleLabel)
 	}
 

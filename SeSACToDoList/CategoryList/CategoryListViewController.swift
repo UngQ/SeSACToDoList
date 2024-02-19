@@ -93,6 +93,10 @@ class CategoryListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+		let realm = try! Realm()
+		print(realm.configuration.fileURL)
+
+
 		configureToolbar()
 		
 		totalList = repository.fetchTotal()
