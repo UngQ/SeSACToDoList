@@ -41,13 +41,16 @@ class TagViewController: BaseViewController {
 	}
 
 	@objc func saveButtonClicked() {
+
+		guard tagTextField.text!.count > 0 &&
+			tagTextField.text!.count <= 6  else {
+				self.view.makeToast("", position: .top, title: "6글자 이하로 입력하세요.")
+				return
+		}
+
 		NotificationCenter.default.post(name: NSNotification.Name("TagReceived"),
 										object: nil,
 										userInfo: ["tag": tagTextField.text!])
 		navigationController?.popViewController(animated: true)
 	}
-
-
-
-
 }

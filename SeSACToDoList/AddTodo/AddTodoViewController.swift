@@ -14,6 +14,7 @@ enum OptionType: Int, CaseIterable {
 	case tag
 	case priority
 	case image
+	case category
 
 	var title: String {
 		switch self {
@@ -25,6 +26,9 @@ enum OptionType: Int, CaseIterable {
 			"우선 순위: 없음"
 		case .image:
 			"이미지"
+
+		case .category:
+			"카테고리"
 		}
 	}
 }
@@ -37,11 +41,12 @@ class AddTodoViewController: BaseViewController {
 
 	//true일 경우, 수정 화면
 	var addOrModify = false
-	var item: TodoTable?
+	var item: Todo?
 
 	var endDate: Date?
 	var tag: String?
 	var priority: Int?
+	var category: Category?
 
 	var selectedImage: UIImage?
 	var selectedURL: URL?
@@ -52,9 +57,7 @@ class AddTodoViewController: BaseViewController {
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		if let selectedIndexPath = mainView.optionTableView.indexPathForSelectedRow {
-			mainView.optionTableView.deselectRow(at: selectedIndexPath, animated: animated)
-		}
+		mainView.optionTableView.reloadData()
 
 	}
 
@@ -103,8 +106,7 @@ class AddTodoViewController: BaseViewController {
 			memo = nil
 		}
 
-		let data = TodoTable(regDate: Date(),
-							 title: mainView.titleTextField.text!,
+		let data = Todo(	 title: mainView.titleTextField.text!,
 							 memo: memo,
 							 endDate: endDate,
 							 tag: tag,
@@ -114,9 +116,14 @@ class AddTodoViewController: BaseViewController {
 			saveImageToDocument(image: image, filename: "\(data.id)")
 		}
 
-		repository.createItem(data)
+		guard let category = category else { 
+			repository.createItem(data)
+			navigationController?.popViewController(animated: true)
+			return }
 
+		repository.createItemInCategory(category: category, todo: data)
 		navigationController?.popViewController(animated: true)
+
 
 	}
 
@@ -133,9 +140,13 @@ class AddTodoViewController: BaseViewController {
 		}
 
 		print("수정")
-		saveImageToDocument(image: selectedImage!, filename: "\(item!.id)")
+
+		if let image = selectedImage {
+			saveImageToDocument(image: image, filename: "\(item!.id)")
+		}
 		repository.updateItem(id: item!.id, title: mainView.titleTextField.text!, memo: memo, endDate: endDate, tag: tag, priority: priority ?? 0)
 
+		
 		navigationController?.popViewController(animated: true)
 
 
@@ -163,6 +174,7 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "OptionTableViewCell", for: indexPath) as! OptionTableViewCell
 		cell.titleLabel.text = OptionType.allCases[indexPath.section].title
+		cell.photoImageView.isHidden = true
 
 		switch OptionType.allCases[indexPath.section] {
 		case .date:
@@ -189,6 +201,10 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 				cell.photoImageView.contentMode = .scaleAspectFill
 			}
 
+		case .category:
+			if let category = self.category {
+				cell.titleLabel.text = "카테고리: \(category.name)"
+			}
 		}
 
 		return cell
@@ -255,6 +271,7 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 				}
 
 				cell.titleLabel.text = "우선 순위: \(value)"
+
 			}
 
 				navigationController?.pushViewController(vc, animated: true)
@@ -296,6 +313,22 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 			alert.addAction(cancel)
 
 			present(alert, animated: true)
+
+		}
+
+		else if indexPath.section == OptionType.category.rawValue {
+
+			let vc = SelectCategoryViewController()
+			vc.valueSpace = {
+				self.category = $0
+				let cell = self.mainView.optionTableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as! OptionTableViewCell
+				print($0.name)
+				cell.titleLabel.text = "카테고리: \($0.name)"
+				self.mainView.optionTableView.reloadData()
+				}
+
+
+			navigationController?.pushViewController(vc, animated: true)
 
 		}
 	}

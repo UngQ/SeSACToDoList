@@ -71,12 +71,13 @@ class CategoryListViewController: BaseViewController {
 	var addCategoryButton: UIBarButtonItem!
 
 	var categoryList: [String] = CategoryDefaultType.allCases.map { $0.title }
+	var customCategoryList: Results<Category>!
 
-	var totalList: Results<TodoTable>!
-	var todayList: Results<TodoTable>!
-	var scheduleList: Results<TodoTable>!
-	var importantList: Results<TodoTable>!
-	var completedList: Results<TodoTable>!
+	var totalList: Results<Todo>!
+	var todayList: Results<Todo>!
+	var scheduleList: Results<Todo>!
+	var importantList: Results<Todo>!
+	var completedList: Results<Todo>!
 
 	let repository = TodoListTableRepository()
 
@@ -88,6 +89,7 @@ class CategoryListViewController: BaseViewController {
 		super.viewWillAppear(animated)
 
 		mainView.categoryCollectionView.reloadData()
+		mainView.customCategoryTableView.reloadData()
 	}
 
     override func viewDidLoad() {
@@ -99,6 +101,8 @@ class CategoryListViewController: BaseViewController {
 
 		configureToolbar()
 		
+		customCategoryList = repository.fetchCategory()
+
 		totalList = repository.fetchTotal()
 		todayList = repository.fetchToday()
 		scheduleList = repository.fetchSchedule()
@@ -112,6 +116,12 @@ class CategoryListViewController: BaseViewController {
 		mainView.categoryCollectionView.dataSource = self
 		mainView.categoryCollectionView.register(CategoryCollectionViewCell.self
 												 , forCellWithReuseIdentifier: "CategoryCollectionViewCell")
+
+		mainView.customCategoryTableView.delegate = self
+		mainView.customCategoryTableView.dataSource = self
+		mainView.customCategoryTableView.register(CustomCategoryTableViewCell.self, forCellReuseIdentifier: "CustomCategoryTableViewCell")
+		mainView.customCategoryTableView.rowHeight = 52
+
 	}
 
 
@@ -140,7 +150,8 @@ class CategoryListViewController: BaseViewController {
 	}
 
 	@objc func addCategoryButtonClicked() {
-		print(#function)
+		let vc = AddCategoryViewController()
+		navigationController?.pushViewController(vc, animated: true)
 	}
 
 
@@ -149,13 +160,32 @@ class CategoryListViewController: BaseViewController {
 
 extension CategoryListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
-	
+	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		let view = UIView()
+
+		let label = UILabel()
+		view.addSubview(label)
+		label.snp.makeConstraints { make in
+			make.edges.equalToSuperview()
+			make.height.equalTo(40)
+		}
+
+		label.text = " 나의 목록"
+		label.textColor = .white
+		label.font = .boldSystemFont(ofSize: 20)
+
+		return view
+
+	}
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return categoryList.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+
+
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as! CategoryCollectionViewCell
 		cell.categoryTitleLabel.text = categoryList[indexPath.row]
 		cell.categoryImageView.image = UIImage(systemName: CategoryDefaultType.allCases[indexPath.row].symbol)
@@ -216,4 +246,32 @@ extension CategoryListViewController: UICollectionViewDelegate, UICollectionView
 	}
 
 
+}
+
+
+extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource {
+
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return customCategoryList.count
+	}
+
+
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCategoryTableViewCell", for: indexPath) as! CustomCategoryTableViewCell
+
+		cell.categoryImageView.image = UIImage(systemName: customCategoryList[indexPath.row].symbol)
+		cell.categoryImageView.tintColor = UIColor(named: customCategoryList[indexPath.row].tintColor)
+		cell.categoryTitleLabel.text = customCategoryList[indexPath.row].name
+		cell.categoryCountLabel.text = "\(customCategoryList[indexPath.row].todo.count)"
+		
+		return cell
+	}
+
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let vc = TodoListInCustomCategoryViewController()
+		vc.category = customCategoryList[indexPath.row]
+		navigationController?.pushViewController(vc, animated: true)
+	}
+
+	
 }

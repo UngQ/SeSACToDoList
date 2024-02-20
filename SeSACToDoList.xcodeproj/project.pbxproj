@@ -29,6 +29,12 @@
 		A5B619EE2B83B3A0005783F4 /* NaverAPIManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619ED2B83B3A0005783F4 /* NaverAPIManger.swift */; };
 		A5B619F02B83B3B3005783F4 /* NaverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619EF2B83B3B3005783F4 /* NaverModel.swift */; };
 		A5B619F22B83B881005783F4 /* BaseImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619F12B83B881005783F4 /* BaseImageView.swift */; };
+		A5B619F52B848870005783F4 /* CustomCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619F42B848870005783F4 /* CustomCategoryTableViewCell.swift */; };
+		A5B619F82B84DEFD005783F4 /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619F72B84DEFD005783F4 /* AddCategoryViewController.swift */; };
+		A5B619FA2B84DF0A005783F4 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619F92B84DF0A005783F4 /* AddCategoryView.swift */; };
+		A5B619FD2B850694005783F4 /* TodoListInCustomCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619FC2B850694005783F4 /* TodoListInCustomCategoryViewController.swift */; };
+		A5B619FF2B8506A6005783F4 /* TodoListInCustomCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B619FE2B8506A6005783F4 /* TodoListInCustomCategoryView.swift */; };
+		A5B61A012B8513C7005783F4 /* SelectCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B61A002B8513C7005783F4 /* SelectCategoryViewController.swift */; };
 		A5B9D1852B7CD023008E4C8E /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1842B7CD023008E4C8E /* CategoryListViewController.swift */; };
 		A5B9D1872B7CD033008E4C8E /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1862B7CD033008E4C8E /* BaseView.swift */; };
 		A5B9D1892B7CD03D008E4C8E /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1882B7CD03D008E4C8E /* CategoryListView.swift */; };
@@ -42,7 +48,7 @@
 		A5B9D1AB2B7DF763008E4C8E /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1AA2B7DF763008E4C8E /* CategoryCollectionViewCell.swift */; };
 		A5B9D1B42B7DFD21008E4C8E /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = A5B9D1B32B7DFD21008E4C8E /* Realm */; };
 		A5B9D1B62B7DFD21008E4C8E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A5B9D1B52B7DFD21008E4C8E /* RealmSwift */; };
-		A5B9D1B82B7DFD5A008E4C8E /* TodoTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1B72B7DFD5A008E4C8E /* TodoTable.swift */; };
+		A5B9D1B82B7DFD5A008E4C8E /* RealmTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1B72B7DFD5A008E4C8E /* RealmTable.swift */; };
 		A5B9D1BA2B7EA233008E4C8E /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1B92B7EA233008E4C8E /* DateFormat.swift */; };
 		A5B9D1BD2B7EABB3008E4C8E /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1BC2B7EABB3008E4C8E /* TodoListViewController.swift */; };
 		A5B9D1BF2B7EABC3008E4C8E /* TodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9D1BE2B7EABC3008E4C8E /* TodoListView.swift */; };
@@ -71,6 +77,12 @@
 		A5B619ED2B83B3A0005783F4 /* NaverAPIManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverAPIManger.swift; sourceTree = "<group>"; };
 		A5B619EF2B83B3B3005783F4 /* NaverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverModel.swift; sourceTree = "<group>"; };
 		A5B619F12B83B881005783F4 /* BaseImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseImageView.swift; sourceTree = "<group>"; };
+		A5B619F42B848870005783F4 /* CustomCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryTableViewCell.swift; sourceTree = "<group>"; };
+		A5B619F72B84DEFD005783F4 /* AddCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
+		A5B619F92B84DF0A005783F4 /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
+		A5B619FC2B850694005783F4 /* TodoListInCustomCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListInCustomCategoryViewController.swift; sourceTree = "<group>"; };
+		A5B619FE2B8506A6005783F4 /* TodoListInCustomCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListInCustomCategoryView.swift; sourceTree = "<group>"; };
+		A5B61A002B8513C7005783F4 /* SelectCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryViewController.swift; sourceTree = "<group>"; };
 		A5B9D1842B7CD023008E4C8E /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		A5B9D1862B7CD033008E4C8E /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		A5B9D1882B7CD03D008E4C8E /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
@@ -81,7 +93,7 @@
 		A5B9D19A2B7D0F70008E4C8E /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		A5B9D19C2B7D124E008E4C8E /* PriorityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityViewController.swift; sourceTree = "<group>"; };
 		A5B9D1AA2B7DF763008E4C8E /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
-		A5B9D1B72B7DFD5A008E4C8E /* TodoTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTable.swift; sourceTree = "<group>"; };
+		A5B9D1B72B7DFD5A008E4C8E /* RealmTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTable.swift; sourceTree = "<group>"; };
 		A5B9D1B92B7EA233008E4C8E /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
 		A5B9D1BC2B7EABB3008E4C8E /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		A5B9D1BE2B7EABC3008E4C8E /* TodoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListView.swift; sourceTree = "<group>"; };
@@ -127,6 +139,8 @@
 		A5701EE82B7CAB5F00F126B0 /* SeSACToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				A5B619F62B84DEE4005783F4 /* AddCategory */,
+				A5B619FB2B85065C005783F4 /* TodoListInCustomCategory */,
 				A5B619E22B83B296005783F4 /* Network */,
 				A5B9D1972B7CFEE5008E4C8E /* Extension */,
 				A5701EFD2B7CAB8F00F126B0 /* Base */,
@@ -184,12 +198,39 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		A5B619F32B848851005783F4 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A5B619F42B848870005783F4 /* CustomCategoryTableViewCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		A5B619F62B84DEE4005783F4 /* AddCategory */ = {
+			isa = PBXGroup;
+			children = (
+				A5B619F72B84DEFD005783F4 /* AddCategoryViewController.swift */,
+				A5B619F92B84DF0A005783F4 /* AddCategoryView.swift */,
+			);
+			path = AddCategory;
+			sourceTree = "<group>";
+		};
+		A5B619FB2B85065C005783F4 /* TodoListInCustomCategory */ = {
+			isa = PBXGroup;
+			children = (
+				A5B619FC2B850694005783F4 /* TodoListInCustomCategoryViewController.swift */,
+				A5B619FE2B8506A6005783F4 /* TodoListInCustomCategoryView.swift */,
+			);
+			path = TodoListInCustomCategory;
+			sourceTree = "<group>";
+		};
 		A5B9D1832B7CD00C008E4C8E /* CategoryList */ = {
 			isa = PBXGroup;
 			children = (
 				A5B9D1842B7CD023008E4C8E /* CategoryListViewController.swift */,
 				A5B9D1882B7CD03D008E4C8E /* CategoryListView.swift */,
 				A5B9D1A92B7DF745008E4C8E /* CollectionViewCell */,
+				A5B619F32B848851005783F4 /* TableViewCell */,
 			);
 			path = CategoryList;
 			sourceTree = "<group>";
@@ -204,6 +245,7 @@
 				A5B9D19A2B7D0F70008E4C8E /* TagViewController.swift */,
 				A5B9D19C2B7D124E008E4C8E /* PriorityViewController.swift */,
 				A5B619DC2B83B18A005783F4 /* ImageWebSearch */,
+				A5B61A002B8513C7005783F4 /* SelectCategoryViewController.swift */,
 			);
 			path = AddTodo;
 			sourceTree = "<group>";
@@ -237,7 +279,7 @@
 		A5B9D1AC2B7DFC98008E4C8E /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				A5B9D1B72B7DFD5A008E4C8E /* TodoTable.swift */,
+				A5B9D1B72B7DFD5A008E4C8E /* RealmTable.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -358,13 +400,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5B9D1B82B7DFD5A008E4C8E /* TodoTable.swift in Sources */,
+				A5B619F82B84DEFD005783F4 /* AddCategoryViewController.swift in Sources */,
+				A5B9D1B82B7DFD5A008E4C8E /* RealmTable.swift in Sources */,
 				A5701EEE2B7CAB5F00F126B0 /* ViewController.swift in Sources */,
 				A5B9D1BA2B7EA233008E4C8E /* DateFormat.swift in Sources */,
+				A5B619FD2B850694005783F4 /* TodoListInCustomCategoryViewController.swift in Sources */,
 				A5701EFF2B7CABA600F126B0 /* BaseViewController.swift in Sources */,
+				A5B619F52B848870005783F4 /* CustomCategoryTableViewCell.swift in Sources */,
 				A5B619CF2B8208E5005783F4 /* StringStrike.swift in Sources */,
 				A5B619DB2B83B108005783F4 /* ImageWebSearchView.swift in Sources */,
 				A5B9D1912B7CD412008E4C8E /* AddTodoView.swift in Sources */,
+				A5B619FA2B84DF0A005783F4 /* AddCategoryView.swift in Sources */,
 				A5B619F22B83B881005783F4 /* BaseImageView.swift in Sources */,
 				A5B619EA2B83B364005783F4 /* APIKey.swift in Sources */,
 				A5B619D72B839013005783F4 /* ImageWebSearchViewController.swift in Sources */,
@@ -372,9 +418,11 @@
 				A5B9D1872B7CD033008E4C8E /* BaseView.swift in Sources */,
 				A5B619EE2B83B3A0005783F4 /* NaverAPIManger.swift in Sources */,
 				A5B9D18F2B7CD404008E4C8E /* AddTodoViewController.swift in Sources */,
+				A5B61A012B8513C7005783F4 /* SelectCategoryViewController.swift in Sources */,
 				A5B619E12B83B1CD005783F4 /* ResultCollectionViewCell.swift in Sources */,
 				A5B9D19D2B7D124E008E4C8E /* PriorityViewController.swift in Sources */,
 				A5B9D1892B7CD03D008E4C8E /* CategoryListView.swift in Sources */,
+				A5B619FF2B8506A6005783F4 /* TodoListInCustomCategoryView.swift in Sources */,
 				A5701EEC2B7CAB5F00F126B0 /* SceneDelegate.swift in Sources */,
 				A5B9D1962B7CDB97008E4C8E /* OptionTableViewCell.swift in Sources */,
 				A5B9D19B2B7D0F70008E4C8E /* TagViewController.swift in Sources */,

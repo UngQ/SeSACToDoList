@@ -1,47 +1,45 @@
 //
-//  TodoListViewController.swift
+//  TodoListInCustomCategoryViewController.swift
 //  SeSACToDoList
 //
-//  Created by ungQ on 2/16/24.
+//  Created by ungQ on 2/21/24.
 //
+
+
 
 import UIKit
 import RealmSwift
 import FSCalendar
 
-class TodoListViewController: BaseViewController {
+class TodoListInCustomCategoryViewController: BaseViewController {
 
-	let mainView = TodoListView()
+	let mainView = TodoListInCustomCategoryView()
 
+	var category: Category!
 	var titleText: String?
-	var list: Results<Todo>! {
-		didSet {
-			mainView.todoListTableView.reloadData()
-			mainView.calendar.reloadData()
-		}
-	}
-	var base: (() -> Results<Todo>)?
+	var list: List<Todo>!
+	
+//	var base: (() -> Results<Todo>)?
 	let repository = TodoListTableRepository()
 
 	override func loadView() {
 		view = mainView
-		list[0]
 	}
-
 
 	override func viewWillAppear(_ animated: Bool) {
 		mainView.todoListTableView.reloadData()
 		mainView.calendar.reloadData()
 	}
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewDidLoad() {
+		super.viewDidLoad()
 
+		list = category?.todo
 
-    }
+	}
 
 	override func configureView() {
-		addPullDownButtonToNavigationBar()
+//		addPullDownButtonToNavigationBar()
 
 		mainView.calendar.delegate = self
 		mainView.calendar.dataSource = self
@@ -50,39 +48,52 @@ class TodoListViewController: BaseViewController {
 		mainView.todoListTableView.dataSource = self
 		mainView.todoListTableView.register(TodoListTableViewCell.self, forCellReuseIdentifier: "TodoListTableViewCell")
 		mainView.todoListTableView.rowHeight = 80
+
+		let item = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusbuttonClicked))
+		navigationItem.rightBarButtonItem = item
 	}
 
-	func createMenuItems() -> UIMenu {
-		let action1 = UIAction(title: "마감일 순") { action in
-			self.list = self.base!()
-			self.list = self.repository.sortEndDate(list: self.list)
-			self.mainView.todoListTableView.reloadData()
-		}
+	@objc func plusbuttonClicked() {
+		print(#function)
 
-		let action2 = UIAction(title: "제목 순") { action in
-			self.list = self.base!()
-			self.list = self.repository.sortTitle(list: self.list)
-			self.mainView.todoListTableView.reloadData()
-		}
+		let data = Todo(title: "아무거나 \(Int.random(in: 1...100))")
 
-		let action3 = UIAction(title: "우선순위 낮음만") { action in
-			self.list = self.repository.sortPriorityLower(list: self.list)
-			self.mainView.todoListTableView.reloadData()
-		}
+		repository.createItemInCategory(category: category, todo: data)
 
-		let menu = UIMenu(title: "정렬", children: [action1, action2, action3])
-		return menu
+		mainView.todoListTableView.reloadData()
 	}
 
-
-	func addPullDownButtonToNavigationBar() {
-		let menu = createMenuItems()
-		let menuBarButton = UIBarButtonItem(title: "Menu", image: UIImage(systemName: "ellipsis.circle"), primaryAction: nil, menu: menu)
-		navigationItem.rightBarButtonItem = menuBarButton
-	}
+//	func createMenuItems() -> UIMenu {
+//		let action1 = UIAction(title: "마감일 순") { action in
+//			self.list = self.base!()
+//			self.list = self.repository.sortEndDate(list: self.list)
+//			self.mainView.todoListTableView.reloadData()
+//		}
+//
+//		let action2 = UIAction(title: "제목 순") { action in
+//			self.list = self.base!()
+//			self.list = self.repository.sortTitle(list: self.list)
+//			self.mainView.todoListTableView.reloadData()
+//		}
+//
+//		let action3 = UIAction(title: "우선순위 낮음만") { action in
+//			self.list = self.repository.sortPriorityLower(list: self.list)
+//			self.mainView.todoListTableView.reloadData()
+//		}
+//
+//		let menu = UIMenu(title: "정렬", children: [action1, action2, action3])
+//		return menu
+//	}
+//
+//
+//	func addPullDownButtonToNavigationBar() {
+//		let menu = createMenuItems()
+//		let menuBarButton = UIBarButtonItem(title: "Menu", image: UIImage(systemName: "ellipsis.circle"), primaryAction: nil, menu: menu)
+//		navigationItem.rightBarButtonItem = menuBarButton
+//	}
 }
 
-extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
+extension TodoListInCustomCategoryViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		list.count
 	}
@@ -91,7 +102,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 		60
 	}
 
-	
+
 
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		let view = TodoListTableHeaderView()
@@ -150,16 +161,16 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 			let vc = AddTodoViewController()
 			vc.addOrModify = true
 			vc.item = self.list[indexPath.row]
-			
+
 
 			vc.endDate = self.list[indexPath.row].endDate
 			vc.tag = self.list[indexPath.row].tag
 			vc.priority = self.list[indexPath.row].priority
-			
+
 			if let image = self.loadImageToDocument(filename: "\(self.list[indexPath.row].id)") {
 				vc.selectedImage = image
 			}
-			
+
 
 			self.navigationController?.pushViewController(vc, animated: true)
 		}
@@ -194,7 +205,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-extension TodoListViewController: FSCalendarDelegate, FSCalendarDataSource {
+extension TodoListInCustomCategoryViewController: FSCalendarDelegate, FSCalendarDataSource {
 
 	func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
 
@@ -204,7 +215,7 @@ extension TodoListViewController: FSCalendarDelegate, FSCalendarDataSource {
 
 		let predicate = NSPredicate(format: "endDate >= %@ && endDate < %@", start as NSDate, end as NSDate)
 
-		return base!().filter(predicate).count
+		return list.filter(predicate).count
 	}
 
 	func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
@@ -217,7 +228,7 @@ extension TodoListViewController: FSCalendarDelegate, FSCalendarDataSource {
 		//쿼리 작성, 변순데 스트링이 들어갈경우 %@, 네모박스라고 생각
 		let predicate = NSPredicate(format: "endDate >= %@ && endDate < %@", start as NSDate, end as NSDate)
 
-		list = base!().filter(predicate)
+//		list = base!().filter(predicate)
 
 
 		mainView.todoListTableView.reloadData()

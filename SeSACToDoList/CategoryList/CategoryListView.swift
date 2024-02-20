@@ -11,6 +11,8 @@ class CategoryListView: BaseView {
 
 	let categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: CategoryListView.configureCollectionViewCellLayout())
 
+	let customCategoryTableView = UITableView(frame: .zero, style: .insetGrouped)
+
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 
@@ -18,11 +20,18 @@ class CategoryListView: BaseView {
 
 	override func configureHierarchy() {
 		addSubview(categoryCollectionView)
+		addSubview(customCategoryTableView)
 	}
 
 	override func configureLayout() {
 		categoryCollectionView.snp.makeConstraints { make in
-			make.edges.equalTo(safeAreaLayoutGuide)
+			make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
+			make.height.equalTo(UIScreen.main.bounds.width / 2 + 96)
+		}
+
+		customCategoryTableView.snp.makeConstraints { make in
+			make.top.equalTo(categoryCollectionView.snp.bottom)
+			make.bottom.horizontalEdges.equalTo(safeAreaLayoutGuide)
 		}
 	}
 
@@ -30,6 +39,8 @@ class CategoryListView: BaseView {
 
 		categoryCollectionView.backgroundColor = .clear
 
+		customCategoryTableView.backgroundColor = .clear
+ 
 	}
 
 
@@ -39,11 +50,11 @@ class CategoryListView: BaseView {
 
 	static func configureCollectionViewCellLayout() -> UICollectionViewFlowLayout {
 		let layout = UICollectionViewFlowLayout()
-		let spacing: CGFloat = 12
+		let spacing: CGFloat = 18
 		let cellWidth = UIScreen.main.bounds.width - (spacing * 3)
 
 		layout.itemSize = CGSize(width: cellWidth / 2, height: cellWidth / 4)
-		layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: 0, right: spacing)
+		layout.sectionInset = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: spacing)
 		layout.minimumLineSpacing = spacing
 		layout.minimumInteritemSpacing = 0
 		layout.scrollDirection = .vertical

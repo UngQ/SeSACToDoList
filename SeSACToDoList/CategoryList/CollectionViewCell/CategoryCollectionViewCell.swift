@@ -51,10 +51,10 @@ class CategoryCollectionViewCell: UICollectionViewCell {
 		backgroundColor = .darkGray
 		layer.cornerRadius = 8
 
-		let cornerRadius = (UIScreen.main.bounds.width - (12 * 3)) / 16
+		let cornerRadius = (UIScreen.main.bounds.width - (18 * 3)) / 16
 		categoryImageView.layer.cornerRadius = cornerRadius
 		categoryImageView.layer.borderColor = UIColor.darkGray.cgColor
-		categoryImageView.layer.borderWidth = 3
+		categoryImageView.layer.borderWidth = 4
 		categoryImageView.layer.masksToBounds = true
 
 
