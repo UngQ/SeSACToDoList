@@ -144,7 +144,16 @@ class AddTodoViewController: BaseViewController {
 		if let image = selectedImage {
 			saveImageToDocument(image: image, filename: "\(item!.id)")
 		}
-		repository.updateItem(id: item!.id, title: mainView.titleTextField.text!, memo: memo, endDate: endDate, tag: tag, priority: priority ?? 0)
+
+		guard let item = item else { 
+			print("no item")
+			return }
+
+		guard let category = category else {
+			repository.updateItem(id: item.id, title: mainView.titleTextField.text!, memo: memo, endDate: endDate, tag: tag, priority: priority ?? 0)
+			return }
+
+		repository.updateItemInCategory(id: item.id, title: mainView.titleTextField.text!, memo: memo, endDate: endDate, tag: tag, priority: priority ?? 0, newCategory: category)
 
 		
 		navigationController?.popViewController(animated: true)

@@ -32,6 +32,45 @@ class TodoListTableRepository {
 		}
 	}
 
+	func updateItemInCategory(id: ObjectId, title: String, memo: String? = nil, endDate: Date? = nil, tag: String? = nil, priority: Int, newCategory: Category? = nil) {
+		do {
+			try realm.write {
+				realm.create(Todo.self,
+							 value: ["id": id,
+									 "title": title,
+									 "memo": memo,
+									 "endDate": endDate,
+									 "tag": tag,
+									 "priority": priority],
+							 update: .modified)
+
+					if let newCategory = newCategory, let todoToUpdate = realm.object(ofType: Todo.self, forPrimaryKey: id) {
+						if let oldCategory = todoToUpdate.main.first {
+							if let index = oldCategory.todo.index(of: todoToUpdate) {
+								oldCategory.todo.remove(at: index)
+							}
+						}
+
+						newCategory.todo.append(todoToUpdate)
+					}
+			}
+		} catch {
+			print(error)
+		}
+	}
+
+	func deleteCategory(_ item: Category) {
+		
+		do {
+			try realm.write {
+				realm.delete(item.todo)
+				realm.delete(item)
+			}
+		} catch {
+			print(error)
+		}
+	}
+
 	func fetchCategory() -> Results<Category> {
 		return realm.objects(Category.self)
 	}

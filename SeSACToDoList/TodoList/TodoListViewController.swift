@@ -14,18 +14,13 @@ class TodoListViewController: BaseViewController {
 	let mainView = TodoListView()
 
 	var titleText: String?
-	var list: Results<Todo>! {
-		didSet {
-			mainView.todoListTableView.reloadData()
-			mainView.calendar.reloadData()
-		}
-	}
+	var list: Results<Todo>!
 	var base: (() -> Results<Todo>)?
 	let repository = TodoListTableRepository()
 
 	override func loadView() {
 		view = mainView
-		list[0]
+
 	}
 
 
@@ -36,8 +31,8 @@ class TodoListViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
+		
+	
     }
 
 	override func configureView() {
@@ -133,6 +128,8 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 			cell.photoImageView.image = image
 		}
 
+
+
 		if list[indexPath.row].doOrNot == true {
 			cell.checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
 			cell.titleLabel.attributedText = list[indexPath.row].title.strikeThrough()
@@ -155,7 +152,9 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 			vc.endDate = self.list[indexPath.row].endDate
 			vc.tag = self.list[indexPath.row].tag
 			vc.priority = self.list[indexPath.row].priority
-			
+			vc.category = self.list[indexPath.row].main.first!
+
+
 			if let image = self.loadImageToDocument(filename: "\(self.list[indexPath.row].id)") {
 				vc.selectedImage = image
 			}

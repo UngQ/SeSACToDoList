@@ -58,7 +58,7 @@ class TodoListInCustomCategoryViewController: BaseViewController {
 
 		let data = Todo(title: "아무거나 \(Int.random(in: 1...100))")
 
-		repository.createItemInCategory(category: category, todo: data)
+//		repository.createItemInCategory(category: category, todo: data)
 
 		mainView.todoListTableView.reloadData()
 	}

@@ -273,5 +273,57 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
 		navigationController?.pushViewController(vc, animated: true)
 	}
 
+	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+		let modify = UIContextualAction(style: .normal, title: "수정") { (action, view, completionHandler) in
+
+			print("수정")
+			completionHandler(true)
+
+//			let vc = AddTodoViewController()
+//			vc.addOrModify = true
+//			vc.item = self.list[indexPath.row]
+//
+//
+//			vc.endDate = self.list[indexPath.row].endDate
+//			vc.tag = self.list[indexPath.row].tag
+//			vc.priority = self.list[indexPath.row].priority
+//			vc.category = self.list[indexPath.row].main.first!
+//
+//
+//			if let image = self.loadImageToDocument(filename: "\(self.list[indexPath.row].id)") {
+//				vc.selectedImage = image
+//			}
+
+//			self.navigationController?.pushViewController(vc, animated: true)
+		}
+
+		let delete = UIContextualAction(style: .normal, title: "삭제") { (action, view, completionHandler) in
+
+			print("삭제")
+			completionHandler(true)
+
+			self.repository.deleteCategory(self.customCategoryList[indexPath.row])
+			self.mainView.customCategoryTableView.reloadData()
+			self.mainView.categoryCollectionView.reloadData()
+		}
+
+		modify.backgroundColor = .gray
+		delete.backgroundColor = .orange
+
+		let config = UISwipeActionsConfiguration(actions: [delete, modify])
+		// 끝까지 안늘어나게 함
+		config.performsFirstActionWithFullSwipe = false
+
+		return config
+	}
+
+	@objc func checkButtonClicked(_ sender: UIButton) {
+		print("check")
+//		repository.updateDoOrNot(list[sender.tag])
+//		mainView.todoListTableView.reloadData()
+	}
+
+
 	
 }
