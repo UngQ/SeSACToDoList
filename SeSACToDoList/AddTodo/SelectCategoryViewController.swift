@@ -21,7 +21,7 @@ class SelectCategoryViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		categoryList = repository.fetchCategory()
+		categoryList = repository.fetchItem(Category.self)
 
     }
 

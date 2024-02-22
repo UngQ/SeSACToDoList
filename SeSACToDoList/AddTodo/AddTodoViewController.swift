@@ -121,7 +121,7 @@ class AddTodoViewController: BaseViewController {
 			navigationController?.popViewController(animated: true)
 			return }
 
-		repository.createItemInCategory(category: category, todo: data)
+		repository.createTodoInCategory(category: category, todo: data)
 		navigationController?.popViewController(animated: true)
 
 
@@ -150,10 +150,10 @@ class AddTodoViewController: BaseViewController {
 			return }
 
 		guard let category = category else {
-			repository.updateItem(id: item.id, title: mainView.titleTextField.text!, memo: memo, endDate: endDate, tag: tag, priority: priority ?? 0)
+			repository.updateTodo(id: item.id, title: mainView.titleTextField.text!, memo: memo, endDate: endDate, tag: tag, priority: priority ?? 0)
 			return }
 
-		repository.updateItemInCategory(id: item.id, title: mainView.titleTextField.text!, memo: memo, endDate: endDate, tag: tag, priority: priority ?? 0, newCategory: category)
+		repository.updateTodo(id: item.id, title: mainView.titleTextField.text!, memo: memo, endDate: endDate, tag: tag, priority: priority ?? 0, newCategory: category)
 
 		
 		navigationController?.popViewController(animated: true)
@@ -330,6 +330,7 @@ extension AddTodoViewController: UITableViewDelegate, UITableViewDataSource {
 			let vc = SelectCategoryViewController()
 			vc.valueSpace = {
 				self.category = $0
+
 				let cell = self.mainView.optionTableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as! OptionTableViewCell
 				print($0.name)
 				cell.titleLabel.text = "카테고리: \($0.name)"

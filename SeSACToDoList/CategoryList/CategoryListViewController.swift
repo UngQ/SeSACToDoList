@@ -73,11 +73,14 @@ class CategoryListViewController: BaseViewController {
 	var categoryList: [String] = CategoryDefaultType.allCases.map { $0.title }
 	var customCategoryList: Results<Category>!
 
-	var totalList: Results<Todo>!
-	var todayList: Results<Todo>!
-	var scheduleList: Results<Todo>!
-	var importantList: Results<Todo>!
-	var completedList: Results<Todo>!
+	lazy var totalList: Results<Todo>! = repository.fetchItem(Todo.self)
+	lazy var todayList: Results<Todo>! = repository.filterTodos(type: .today, list: totalList)
+	lazy var scheduleList: Results<Todo>! = repository.filterTodos(type: .schedule, list: totalList)
+	lazy var importantList: Results<Todo>! = repository.filterTodos(type: .important, list: totalList)
+	lazy var completedList: Results<Todo>! = repository.filterTodos(type: .completed, list: totalList)
+
+	let startOfDay = Calendar.current.startOfDay(for: Date())
+    lazy var endOfDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay)!
 
 	let repository = TodoListTableRepository()
 
@@ -97,18 +100,16 @@ class CategoryListViewController: BaseViewController {
 
 		let realm = try! Realm()
 		print(realm.configuration.fileURL)
-
+		do {
+			let version = try schemaVersionAtURL(realm.configuration.fileURL!)
+			print("Realm Scheme = \(version)")
+		} catch {
+			print(error)
+		}
 
 		configureToolbar()
 		
-		customCategoryList = repository.fetchCategory()
-
-		totalList = repository.fetchTotal()
-		todayList = repository.fetchToday()
-		scheduleList = repository.fetchSchedule()
-		importantList = repository.fetchImportant()
-		completedList = repository.fetchCompleted()
-
+		customCategoryList = repository.fetchItem(Category.self)
     }
 
 	override func configureView() {
@@ -184,8 +185,6 @@ extension CategoryListViewController: UICollectionViewDelegate, UICollectionView
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-
-
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as! CategoryCollectionViewCell
 		cell.categoryTitleLabel.text = categoryList[indexPath.row]
 		cell.categoryImageView.image = UIImage(systemName: CategoryDefaultType.allCases[indexPath.row].symbol)
@@ -197,23 +196,14 @@ extension CategoryListViewController: UICollectionViewDelegate, UICollectionView
 		switch CategoryDefaultType.allCases[index] {
 		case .total:
 			cell.categoryCountLabel.text = "\(totalList.count)"
-
 		case .today:
-
 			cell.categoryCountLabel.text = "\(todayList.count)"
-
 		case .schedule:
-
 			cell.categoryCountLabel.text = "\(scheduleList.count)"
-
 		case .important:
-
 			cell.categoryCountLabel.text = "\(importantList.count)"
-
-
 		case .completed:
 			cell.categoryCountLabel.text = "\(completedList.count)"
-
 		}
 
 		return cell
@@ -221,31 +211,27 @@ extension CategoryListViewController: UICollectionViewDelegate, UICollectionView
 
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		let list = repository.fetchItem(Todo.self)
+
 		let vc = TodoListViewController()
+
 		vc.titleText = CategoryDefaultType.allCases[indexPath.row].title
 
 		switch CategoryDefaultType.allCases[indexPath.row] {
 		case .total:
-			vc.list = repository.fetchTotal()
-			vc.base = repository.fetchTotal
+			vc.originalList = list
 		case .today:
-			vc.list = repository.fetchToday()
-			vc.base = repository.fetchToday
+			vc.originalList = repository.filterTodos(type: .today, list: list)
 		case .schedule:
-			vc.list = repository.fetchSchedule()
-			vc.base = repository.fetchSchedule
+			vc.originalList = repository.filterTodos(type: .schedule, list: list)
 		case .important:
-			vc.list = repository.fetchImportant()
-			vc.base = repository.fetchImportant
+			vc.originalList = repository.filterTodos(type: .important, list: list)
 		case .completed:
-			vc.list = repository.fetchCompleted()
-			vc.base = repository.fetchCompleted
+			vc.originalList = repository.filterTodos(type: .completed, list: list)
 		}
 
 		navigationController?.pushViewController(vc, animated: true)
 	}
-
-
 }
 
 
@@ -280,22 +266,12 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
 			print("수정")
 			completionHandler(true)
 
-//			let vc = AddTodoViewController()
-//			vc.addOrModify = true
-//			vc.item = self.list[indexPath.row]
-//
-//
-//			vc.endDate = self.list[indexPath.row].endDate
-//			vc.tag = self.list[indexPath.row].tag
-//			vc.priority = self.list[indexPath.row].priority
-//			vc.category = self.list[indexPath.row].main.first!
-//
-//
-//			if let image = self.loadImageToDocument(filename: "\(self.list[indexPath.row].id)") {
-//				vc.selectedImage = image
-//			}
+			let vc = AddCategoryViewController()
+			vc.addOrModify = true
+			vc.category = self.customCategoryList[indexPath.row]
 
-//			self.navigationController?.pushViewController(vc, animated: true)
+
+			self.navigationController?.pushViewController(vc, animated: true)
 		}
 
 		let delete = UIContextualAction(style: .normal, title: "삭제") { (action, view, completionHandler) in
@@ -303,7 +279,7 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
 			print("삭제")
 			completionHandler(true)
 
-			self.repository.deleteCategory(self.customCategoryList[indexPath.row])
+			self.repository.deleteItem(self.customCategoryList[indexPath.row])
 			self.mainView.customCategoryTableView.reloadData()
 			self.mainView.categoryCollectionView.reloadData()
 		}
@@ -317,13 +293,5 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
 
 		return config
 	}
-
-	@objc func checkButtonClicked(_ sender: UIButton) {
-		print("check")
-//		repository.updateDoOrNot(list[sender.tag])
-//		mainView.todoListTableView.reloadData()
-	}
-
-
 	
 }

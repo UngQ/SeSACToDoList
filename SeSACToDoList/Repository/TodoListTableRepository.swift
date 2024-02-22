@@ -7,22 +7,30 @@
 import Foundation
 import RealmSwift
 
+enum SortType {
+	case endDate
+	case title
+	case priorityLower
+}
+
 class TodoListTableRepository {
 
 	private let realm = try! Realm()
 
-	func createCategory(_ item: Category) {
+	//신규 생성
+	func createItem<T: Object>(_ item: T) {
 
 		do {
 			try realm.write {
 				realm.add(item)
 			}
 		} catch {
-			print("createCategory Error")
+			print("create Error")
 		}
 	}
 
-	func createItemInCategory(category: Category, todo: Todo) {
+	//카테고리가 포함된 투두 생성
+	func createTodoInCategory(category: Category, todo: Todo) {
 		do {
 			try realm.write {
 				category.todo.append(todo)
@@ -32,7 +40,33 @@ class TodoListTableRepository {
 		}
 	}
 
-	func updateItemInCategory(id: ObjectId, title: String, memo: String? = nil, endDate: Date? = nil, tag: String? = nil, priority: Int, newCategory: Category? = nil) {
+	//카테고리 업데이트
+	func updateCategory(id: ObjectId,
+						name: String,
+						tintColor: String,
+						symbol: String) {
+		do {
+			try realm.write {
+				realm.create(Category.self,
+							 value: ["id": id,
+								"name": name,
+									 "tintColor": tintColor,
+									 "symbol": symbol],
+							 update: .modified)
+			}
+		} catch {
+			print(error)
+		}
+	}
+
+	//투두 업데이트
+	func updateTodo(id: ObjectId,
+					title: String,
+					memo: String? = nil,
+					endDate: Date? = nil,
+					tag: String? = nil,
+					priority: Int,
+					newCategory: Category? = nil) {
 		do {
 			try realm.write {
 				realm.create(Todo.self,
@@ -59,109 +93,58 @@ class TodoListTableRepository {
 		}
 	}
 
-	func deleteCategory(_ item: Category) {
-		
+	//삭제
+	func deleteItem<T: Object>(_ item: T) {
 		do {
 			try realm.write {
-				realm.delete(item.todo)
+				if let categoryItem = item as? Category {
+					realm.delete(categoryItem.todo)
+				}
 				realm.delete(item)
 			}
-		} catch {
-			print(error)
+		}
+		catch {
+			print("delete error")
+
 		}
 	}
 
-	func fetchCategory() -> Results<Category> {
-		return realm.objects(Category.self)
+	func fetchItem<T: Object>(_ type: T.Type) -> Results<T> {
+		return realm.objects(type)
 	}
 
-	func createItem(_ item: Todo) {
+	func filterTodos(type: CategoryDefaultType, list: Results<Todo>) -> Results<Todo> {
+		switch type {
+		case .total:
+			return list
+		case .today:
+			let start = Calendar.current.startOfDay(for: Date())
+			let end = Calendar.current.date(byAdding: .day, value: 1, to: start) ?? Date()
+			let predicate = NSPredicate(format: "endDate >= %@ && endDate < %@", argumentArray: [start, end])
+			return list.filter(predicate)
 
-		do {
-			try realm.write {
-				realm.add(item)
-			}
-		} catch {
-			print(error)
-		}
+		case .schedule:
+			let predicate = NSPredicate(format: "endDate > %@", Date() as NSDate)
+			return list.filter(predicate)
 
-	}
+		case .important:
+			return list.filter("priority == 1")
 
-
-	func updateItem(id: ObjectId, title: String, memo: String? = nil, endDate: Date? = nil, tag: String? = nil, priority: Int) {
-		do {
-			try realm.write {
-				realm.create(Todo.self,
-							 value: ["id": id,
-									 "title": title,
-									 "memo": memo,
-									 "endDate": endDate,
-									 "tag": tag,
-									 "priority": priority],
-							 update: .modified)
-			}
-		} catch {
-			print(error)
+		case .completed:
+			return list.filter("doOrNot == true")
 		}
 	}
 
-	func fetchTotal() -> Results<Todo> {
-		return realm.objects(Todo.self)
-	}
 
-	func fetchTodo(categoryId: LinkingObjects<Category>) -> Results<Todo> {
-		return realm.objects(Todo.self).where {
-			$0.main == categoryId
-		}
-	}
 
-	func fetchToday() -> Results<Todo> {
-		let start = Calendar.current.startOfDay(for: Date())
-		let end: Date = Calendar.current.date(byAdding: .day, value: 1, to: start) ?? Date()
-		let predicate = NSPredicate(format: "endDate >= %@ && endDate < %@", start as NSDate, end as NSDate)
-
-		return realm.objects(Todo.self).filter(predicate)
-	}
-
-	func fetchSchedule() -> Results<Todo> {
-		
-		let predicate = NSPredicate(format: "endDate > %@", Date() as NSDate)
-		return realm.objects(Todo.self).filter(predicate)
-	}
-
-	func fetchImportant() -> Results<Todo> {
-		return realm.objects(Todo.self).where {
-			$0.priority == 1
-		}
-	}
-
-	func fetchCompleted() -> Results<Todo> {
-		return realm.objects(Todo.self).where {
-			$0.doOrNot == true
-		}
-	}
-
-	func sortEndDate(list: Results<Todo>!) -> Results<Todo> {
-		list.sorted(byKeyPath: "endDate", ascending: true)
-	}
-
-	func sortTitle(list: Results<Todo>!) -> Results<Todo> {
-		list.sorted(byKeyPath: "title", ascending: true)
-	}
-
-	func sortPriorityLower(list: Results<Todo>!) -> Results<Todo> {
-		list.where {
-			$0.priority == PriorityType.lower.rawValue
-		}
-	}
-
-	func deleteItem(_ item: Todo) {
-		do {
-			try realm.write {
-				realm.delete(item)
-			}
-		} catch {
-			print(error)
+	func sortTodos(list: Results<Todo>, type: SortType) -> Results<Todo> {
+		switch type {
+		case .endDate:
+			return list.sorted(byKeyPath: "endDate", ascending: true)
+		case .title:
+			return list.sorted(byKeyPath: "title", ascending: true)
+		case .priorityLower:
+			return list.filter("priority == %@", PriorityType.lower.rawValue)
 		}
 	}
 

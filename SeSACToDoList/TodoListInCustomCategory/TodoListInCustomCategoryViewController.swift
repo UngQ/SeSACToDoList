@@ -17,9 +17,8 @@ class TodoListInCustomCategoryViewController: BaseViewController {
 
 	var category: Category!
 	var titleText: String?
-	var list: List<Todo>!
-	
-//	var base: (() -> Results<Todo>)?
+	lazy var list: List<Todo> = category.todo
+
 	let repository = TodoListTableRepository()
 
 	override func loadView() {
@@ -33,8 +32,6 @@ class TodoListInCustomCategoryViewController: BaseViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
-		list = category?.todo
 
 	}
 
@@ -119,6 +116,7 @@ extension TodoListInCustomCategoryViewController: UITableViewDelegate, UITableVi
 		cell.checkButton.addTarget(self, action: #selector(checkButtonClicked), for: .touchUpInside)
 		cell.checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
 
+		//prepareForReuse 로 이동 수정
 		cell.titleLabel.attributedText = list[indexPath.row].title.removeStrikeThrough()
 		cell.titleLabel.text = list[indexPath.row].title
 		cell.priorityLabel.text = "\(PriorityType.allCases[list[indexPath.row].priority].symbol)"
@@ -166,6 +164,11 @@ extension TodoListInCustomCategoryViewController: UITableViewDelegate, UITableVi
 			vc.endDate = self.list[indexPath.row].endDate
 			vc.tag = self.list[indexPath.row].tag
 			vc.priority = self.list[indexPath.row].priority
+
+			if let category = self.list[indexPath.row].main.first {
+				vc.category = category
+				print(category.name)
+			}
 
 			if let image = self.loadImageToDocument(filename: "\(self.list[indexPath.row].id)") {
 				vc.selectedImage = image
@@ -228,7 +231,7 @@ extension TodoListInCustomCategoryViewController: FSCalendarDelegate, FSCalendar
 		//쿼리 작성, 변순데 스트링이 들어갈경우 %@, 네모박스라고 생각
 		let predicate = NSPredicate(format: "endDate >= %@ && endDate < %@", start as NSDate, end as NSDate)
 
-//		list = base!().filter(predicate)
+//		list = 
 
 
 		mainView.todoListTableView.reloadData()

@@ -14,8 +14,8 @@ class TodoListViewController: BaseViewController {
 	let mainView = TodoListView()
 
 	var titleText: String?
+	var originalList: Results<Todo>!
 	var list: Results<Todo>!
-	var base: (() -> Results<Todo>)?
 	let repository = TodoListTableRepository()
 
 	override func loadView() {
@@ -32,7 +32,7 @@ class TodoListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-	
+		list = originalList
     }
 
 	override func configureView() {
@@ -49,19 +49,20 @@ class TodoListViewController: BaseViewController {
 
 	func createMenuItems() -> UIMenu {
 		let action1 = UIAction(title: "마감일 순") { action in
-			self.list = self.base!()
-			self.list = self.repository.sortEndDate(list: self.list)
+			self.list = self.originalList
+			self.list = self.repository.sortTodos(list: self.list, type: .endDate)
 			self.mainView.todoListTableView.reloadData()
 		}
 
 		let action2 = UIAction(title: "제목 순") { action in
-			self.list = self.base!()
-			self.list = self.repository.sortTitle(list: self.list)
+			self.list = self.originalList
+			self.list = self.repository.sortTodos(list: self.list, type: .title)
 			self.mainView.todoListTableView.reloadData()
 		}
 
 		let action3 = UIAction(title: "우선순위 낮음만") { action in
-			self.list = self.repository.sortPriorityLower(list: self.list)
+			self.list = self.originalList
+			self.list = self.repository.sortTodos(list: self.list, type: .priorityLower)
 			self.mainView.todoListTableView.reloadData()
 		}
 
@@ -103,6 +104,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 		cell.checkButton.addTarget(self, action: #selector(checkButtonClicked), for: .touchUpInside)
 		cell.checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
 
+		//prepareForReuse 로 이동 수정
 		cell.titleLabel.attributedText = list[indexPath.row].title.removeStrikeThrough()
 		cell.titleLabel.text = list[indexPath.row].title
 		cell.priorityLabel.text = "\(PriorityType.allCases[list[indexPath.row].priority].symbol)"
@@ -152,8 +154,11 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 			vc.endDate = self.list[indexPath.row].endDate
 			vc.tag = self.list[indexPath.row].tag
 			vc.priority = self.list[indexPath.row].priority
-			vc.category = self.list[indexPath.row].main.first!
 
+			if let category = self.list[indexPath.row].main.first {
+				vc.category = category
+				print(category.name)
+			}
 
 			if let image = self.loadImageToDocument(filename: "\(self.list[indexPath.row].id)") {
 				vc.selectedImage = image
@@ -203,7 +208,7 @@ extension TodoListViewController: FSCalendarDelegate, FSCalendarDataSource {
 
 		let predicate = NSPredicate(format: "endDate >= %@ && endDate < %@", start as NSDate, end as NSDate)
 
-		return base!().filter(predicate).count
+		return originalList.filter(predicate).count
 	}
 
 	func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
@@ -216,7 +221,7 @@ extension TodoListViewController: FSCalendarDelegate, FSCalendarDataSource {
 		//쿼리 작성, 변순데 스트링이 들어갈경우 %@, 네모박스라고 생각
 		let predicate = NSPredicate(format: "endDate >= %@ && endDate < %@", start as NSDate, end as NSDate)
 
-		list = base!().filter(predicate)
+		list = originalList.filter(predicate)
 
 
 		mainView.todoListTableView.reloadData()
