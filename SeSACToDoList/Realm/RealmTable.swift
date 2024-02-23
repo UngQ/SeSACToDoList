@@ -37,6 +37,8 @@ class Todo: Object {
 	@Persisted var priority: Int
 	@Persisted var doOrNot: Bool
 	@Persisted(originProperty: "todo") var main: LinkingObjects<Category>
+	//카테고리ID값
+	@Persisted var categoryID: ObjectId
 
 	convenience init(title: String, memo: String? = nil, endDate: Date? = nil, tag: String? = nil, priority: Int = 0) {
 		self.init()

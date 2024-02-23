@@ -33,6 +33,8 @@ class TodoListInCustomCategoryViewController: BaseViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+//		category.filter("todo.title = 'develop'")
+
 	}
 
 	override func configureView() {
